@@ -23,10 +23,16 @@ class AuthController extends Controller
         $result = $this->authService->authenticate($request->validated());
 
         if (!$result) {
-            return response()->json("INVALID CREDENTIALS", Response::HTTP_UNAUTHORIZED);
+            return response()->json("INVALID_CREDENTIALS", Response::HTTP_UNAUTHORIZED);
         }
 
-        return response()->json("INVALID CREDENTIALS", Response::HTTP_OK);
+        return response()->json($result, Response::HTTP_OK);
+    }
 
+    public function logout(Request $request, $sessionId): JsonResponse
+    {
+        $result = $this->authService->unauthenticate($request->user(), $sessionId);
+
+        return response()->json($result, Response::HTTP_OK);
     }
 }

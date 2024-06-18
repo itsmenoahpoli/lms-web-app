@@ -27,9 +27,15 @@ class AuthService {
         return $session;
     }
 
-    private function endSessionLog($sessionId, $userId)
+    private function endSessionLog($sessionId)
     {
-        //
+        $session = $this->userSession
+                    ->where('session_id', $sessionId)
+                    ->update([
+                        'signoutAt' => now()
+                    ]);
+
+        return $session;
     }
 
     public function authenticate($credentials)
@@ -49,5 +55,15 @@ class AuthService {
                 'session'   => $session
             );
         }
+
+        return NULL;
+    }
+
+    public function unauthenticate($user, $sessionId)
+    {
+        $user->currentAccessToken()->delete();
+        $session = $this->endSessionLog($sessionId);
+
+        return $session;
     }
 }
