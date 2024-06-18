@@ -4,16 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class UserOtp extends Model
+class UserRole extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    public function user() : BelongsTo
+    public function users() : HasMany
     {
-        return $this->belongsTo(\App\Models\User::class);
+        return $this->hasMany(\App\Models\User::class);
     }
 }
