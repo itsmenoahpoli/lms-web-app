@@ -16,5 +16,5 @@ use Carbon\Carbon;
 */
 
 Route::get('/', function () {
-    return now();
-});
+    return view('app');
+})->where('any', '^(?!api\/)[\/\w\.-]*');
