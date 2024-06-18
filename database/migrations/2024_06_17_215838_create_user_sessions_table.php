@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('user_name');
             $table->string('user_email');
-            $table->string('signinAt');
-            $table->string('signoutAt')->nullable();
+            $table->timestamp('signinAt');
+            $table->timestamp('signoutAt')->nullable();
             $table->timestamps();
         });
     }

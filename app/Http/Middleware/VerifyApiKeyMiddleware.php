@@ -15,7 +15,7 @@ class VerifyApiKeyMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!$request->hasHeader('X-API-KEY') || ($request->header('X-API-KEY') !== env('X-API-KEY'))) {
+        if (!$request->hasHeader('X-API-KEY') || ($request->header('X-API-KEY') !== env('APP_API_KEY'))) {
             return response()->json("FORBIDDEN", Response::HTTP_FORBIDDEN);
         }
 
