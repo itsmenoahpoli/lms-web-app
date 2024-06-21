@@ -18,15 +18,14 @@ class AuthService {
     private function createSessionLog($user)
     {
         $sessionId = Str::random(10);
-        $session = $this->userSession->query()->create([
+
+        return $this->userSession->query()->create([
             'session_id'    => $sessionId,
             'user_id'       => $user->id,
             'user_name'     => $user->name,
             'user_email'    => $user->email,
-            'signinAt'      => now()
+            'signin_at'      => now()
         ]);
-
-        return $session;
     }
 
     private function endSessionLog($sessionId)
