@@ -5,18 +5,20 @@ namespace App\Services;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Models\UserSession;
+use App\Models\UserOtp;
 
 
 class AuthService {
     public function __construct(
-        private readonly UserSession $userSession
+        private readonly UserSession $userSession,
+        private readonly UserOtp $userOtp
     )
     {}
 
     private function createSessionLog($user)
     {
         $sessionId = Str::random(10);
-        $session = $this->userSession->create([
+        $session = $this->userSession->query()->create([
             'session_id'    => $sessionId,
             'user_id'       => $user->id,
             'user_name'     => $user->name,
@@ -65,5 +67,16 @@ class AuthService {
         $session = $this->endSessionLog($sessionId);
 
         return $session;
+    }
+
+    public function createOtp($payload)
+    {
+        $code = random_int(100000, 999999);
+        $otp = $this->userOtp->query()->create();
+    }
+
+    public function verifyOtp($payload)
+    {
+        //
     }
 }

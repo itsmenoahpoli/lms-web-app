@@ -16,6 +16,7 @@ class AccountsController extends Controller
         private readonly AccountsService $service
     )
     {}
+
     /**
      * Display a listing of the resource.
      */
@@ -33,6 +34,7 @@ class AccountsController extends Controller
 
         return response()->json($result, Response::HTTP_OK);
     }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -42,8 +44,9 @@ class AccountsController extends Controller
             $request->safe($request->validated)
         );
 
-        return response()->json($result, 201);
+        return response()->json($result, Response::HTTP_CREATED);
     }
+
     /**
      * Display the specified resource.
      */
@@ -53,6 +56,7 @@ class AccountsController extends Controller
 
         return response()->json($result, Response::HTTP_OK);
     }
+
     /**
      * Update the specified resource in storage.
      */
@@ -65,6 +69,7 @@ class AccountsController extends Controller
 
         return response()->json($result, Response::HTTP_OK);
     }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -72,6 +77,6 @@ class AccountsController extends Controller
     {
         $result = $this->service->deleteById($id);
 
-        return response()->json($result, 204);
+        return response()->json($result, Response::HTTP_NO_CONTENT);
     }
 }

@@ -35,4 +35,18 @@ class AuthController extends Controller
 
         return response()->json($result, Response::HTTP_OK);
     }
+
+    public function requestOtp(Request $request) : JsonResponse
+    {
+        $result = null;
+
+        return response()->json($result, Response::HTTP_OK);
+    }
+
+    public function verifytOtp(Request $request) : JsonResponse
+    {
+        $result = null;
+
+        return response()->json($result, Response::HTTP_OK);
+    }
 }

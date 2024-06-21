@@ -11,7 +11,7 @@ class UpdateAccountRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class UpdateAccountRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name'          => 'string|required',
+            'email'         => 'email|required',
+            'password'      => 'string|required|min:8|max:32',
+            'user_role_id'  => 'integer|required',
+            'is_enabled'    => 'boolean|nullable'
         ];
     }
 }
