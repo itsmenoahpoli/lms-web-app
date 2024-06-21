@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\SystemController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\Admin\AccountsController;
 
@@ -16,6 +17,9 @@ use App\Http\Controllers\Api\Admin\AccountsController;
 */
 
 Route::prefix('v1')->middleware('verify.api-key')->group(function () {
+    Route::get('healthcheck', [SystemController::class, 'healthcheck'])->name('api.healthcheck');
+
+
     Route::prefix('auth')->group(function () {
         Route::post('login', [AuthController::class, 'login'])->name('auth.login');
 

@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
-use App\Services\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use App\Services\AuthService;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\GetOtpRequest;
+use App\Http\Requests\Auth\VerifyOtpRequest;
+
 
 
 
@@ -22,10 +25,6 @@ class AuthController extends Controller
     {
         $result = $this->authService->authenticate($request->validated());
 
-        if (!$result) {
-            return response()->json("INVALID_CREDENTIALS", Response::HTTP_UNAUTHORIZED);
-        }
-
         return response()->json($result, Response::HTTP_OK);
     }
 
@@ -36,16 +35,16 @@ class AuthController extends Controller
         return response()->json($result, Response::HTTP_OK);
     }
 
-    public function requestOtp(Request $request) : JsonResponse
+    public function requestOtp(GetOtpRequest $request) : JsonResponse
     {
-        $result = null;
+        $result = $this->authService->createOtp($request->validated());
 
         return response()->json($result, Response::HTTP_OK);
     }
 
-    public function verifytOtp(Request $request) : JsonResponse
+    public function verifytOtp(VerifyOtpRequest $request) : JsonResponse
     {
-        $result = null;
+        $result = $this->authService->verifyOtp($request->validated());
 
         return response()->json($result, Response::HTTP_OK);
     }

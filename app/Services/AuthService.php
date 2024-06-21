@@ -4,12 +4,15 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\UserSession;
 use App\Models\UserOtp;
-
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class AuthService {
     public function __construct(
+        private readonly User $user,
         private readonly UserSession $userSession,
         private readonly UserOtp $userOtp
     )
@@ -30,13 +33,11 @@ class AuthService {
 
     private function endSessionLog($sessionId)
     {
-        $session = $this->userSession
-                    ->where('session_id', $sessionId)
-                    ->update([
-                        'signoutAt' => now()
-                    ]);
-
-        return $session;
+        return $this->userSession
+                ->where('session_id', $sessionId)
+                ->update([
+                    'signoutAt' => now()
+                ]);
     }
 
     public function authenticate($credentials)
@@ -57,7 +58,7 @@ class AuthService {
             );
         }
 
-        return NULL;
+        throw new HttpException(401, 'USER_NOT_FOUND');
     }
 
     public function unauthenticate($user, $sessionId)
@@ -70,8 +71,21 @@ class AuthService {
 
     public function createOtp($payload)
     {
+        $user = $this->user->query()->where('email', $payload->email);
+
+        if (!$user) {
+            throw new HttpException(404, 'USER_NOT_FOUND');
+        }
+
         $code = random_int(100000, 999999);
-        $otp = $this->userOtp->query()->create();
+        $expiresAt = Carbon::now()->addHours(2);
+
+        // TODO: Send OTP via mail
+
+        return $this->userOtp->query()->create([
+            'code' => $code,
+            'expiresAt' => $expiresAt
+        ]);
     }
 
     public function verifyOtp($payload)
