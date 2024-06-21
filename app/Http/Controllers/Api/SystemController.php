@@ -11,6 +11,6 @@ class SystemController extends Controller
 {
     public function healthcheck() : JsonResponse
     {
-        return response()->json(['status' => 'online' ], Response::HTTP_OK);
+        return response()->json(['status' => 'online'], Response::HTTP_OK);
     }
 }

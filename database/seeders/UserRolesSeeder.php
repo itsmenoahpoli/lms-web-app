@@ -16,7 +16,7 @@ class UserRolesSeeder extends Seeder
 
         foreach ($roles as $role)
         {
-            UserRole::create([
+            UserRole::query()->create([
                 'name'          => $role,
                 'is_enabled'    => true
             ]);
