@@ -48,13 +48,14 @@ class AuthService {
              * @var App\Models\User $user
              */
             $user = Auth::user();
-            $token = $user->createToken()->plainTexttoken;
+            $user->load('user_role');
+            $token = $user->createToken(now()->timestamp)->plainTextToken;
             $session = $this->createSessionLog($user);
 
             return (object) array(
                 'token'     => $token,
                 'user'      => $user,
-                'session'   => $session
+                'session'   => $session->session_id
             );
         }
 
