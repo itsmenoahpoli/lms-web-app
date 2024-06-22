@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Throwable;
@@ -35,39 +36,30 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $exception
+     * @param  \Throwable  $e
      * @return \Illuminate\Http\Response|\Illuminate\Http\JsonResponse
      */
-    public function render($request, Throwable $exception)
+    public function render($request, Throwable $e) : JsonResponse
     {
-        if ($exception instanceof \Symfony\Component\HttpKernel\Exception\HttpException) {
-            $statusCode = $exception->getStatusCode();
-        } else {
-            $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+        // If the request expects JSON (e.g., API request)
+        if ($request->expectsJson()) {
+            // If the exception is an HttpException, get the status code
+            if ($e instanceof HttpException) {
+                $statusCode = $e->getStatusCode();
+            } else {
+                // For all other exceptions, assume a 500 Internal Server Error
+                $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+            }
+
+            // Return a JSON response with the status code and message
+            return response()->json([
+                'message' => $statusCode === Response::HTTP_INTERNAL_SERVER_ERROR ? 'Internal Server Error' : $e->getMessage(),
+                'status' => $statusCode
+            ], $statusCode);
         }
 
-        if ($statusCode === Response::HTTP_INTERNAL_SERVER_ERROR) {
-            return $this->errorResponse($exception);
-        }
-
-        return parent::render($request, $exception);
-    }
-
-    /**
-     * Create a JSON response for 500 errors.
-     *
-     * @param  \Throwable  $exception
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function errorResponse(Throwable $exception): JsonResponse
-    {
-        $response = [
-            'message' => 'Internal Server Error',
-            'error' => $exception->getMessage(),
-            'code' => 500,
-        ];
-
-        return response()->json($response, 500);
+        // For non-JSON requests, use the default behavior
+        return parent::render($request, $e);
     }
 
     /**
