@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\SystemController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\Admin\AccountsController;
+use App\Http\Controllers\Api\Admin\RolesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,9 +29,10 @@ Route::prefix('v1')->middleware('verify.api-key')->group(function () {
         });
     });
 
-    Route::prefix('admin')->group(function () {
+    Route::prefix('admin')->middleware(['auth:sanctum', 'role.admin'])->group(function () {
         Route::apiResources([
             'accounts' => AccountsController::class,
+            'roles' => RolesController::class,
         ]);
     });
 });

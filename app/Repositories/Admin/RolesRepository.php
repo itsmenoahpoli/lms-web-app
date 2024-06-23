@@ -5,7 +5,7 @@ namespace App\Repositories\Admin;
 use Illuminate\Database\Eloquent\Model;
 use App\Repositories\BaseRepository;
 
-class AccountsRepository extends BaseRepository
+class RolesRepository extends BaseRepository
 {
     public function __construct(
         private readonly Model $model,
@@ -16,8 +16,6 @@ class AccountsRepository extends BaseRepository
 
     public function create($data)
     {
-        $data['password'] = bcrypt($data['password']);
-
-        return parent::create($data);
+        return 'bcrypt($data["password"])';
     }
 }

@@ -7,22 +7,26 @@ use App\Repositories\BaseRepositoryInterface;
 
 class BaseRepository implements BaseRepositoryInterface
 {
+    private $eloquentModel;
+
     public function __construct(
         private readonly Model $model,
         private readonly array $relationships,
     )
-    {}
+    {
+        $this->eloquentModel = $this->model->with('user_role');
+    }
 
     public function getPaginated($page = 1, $pageSize = 25, $orderBy = 'created_at', $sortBy = 'asc')
     {
-        $result = $this->model->orderBy($orderBy, $sortBy)->paginate($pageSize);
+        $result = $this->eloquentModel->orderBy($orderBy, $sortBy)->paginate($pageSize);
 
         return $result;
     }
 
-    public function getUnpaginated($orderBy = 'created_at', $sortBy = 'asc')
+    public function getUnpaginated($orderBy = 'id', $sortBy = 'desc')
     {
-        $result = $this->model->orderBy($orderBy, $sortBy)->get();
+        $result = $this->eloquentModel->orderBy($orderBy, $sortBy)->get();
 
         return $result;
     }

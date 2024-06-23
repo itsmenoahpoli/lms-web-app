@@ -23,7 +23,7 @@ class CreateAccountRequest extends FormRequest
     {
         return [
             'name'          => 'string|required',
-            'email'         => 'email|required',
+            'email'         => 'email|required|unique:users',
             'password'      => 'string|required|min:8|max:32',
             'user_role_id'  => 'integer|required',
             'is_enabled'    => 'boolean|nullable'

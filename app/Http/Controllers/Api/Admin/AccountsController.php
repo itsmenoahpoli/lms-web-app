@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use App\Helpers\ParamsHelpers;
 use App\Services\Admin\AccountsService;
 use App\Http\Requests\Admin\User\CreateAccountRequest;
 use App\Http\Requests\Admin\User\UpdateAccountRequest;
-use App\Helpers\ParamsHelpers;
 
 class AccountsController extends Controller
 {
@@ -20,7 +21,7 @@ class AccountsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request) : JsonResponse
     {
         $params = ParamsHelpers::paginationParams($request->query());
         $result = ParamsHelpers::hasExpectsRawList($params)
@@ -41,7 +42,7 @@ class AccountsController extends Controller
     public function store(CreateAccountRequest $request)
     {
         $result = $this->service->create(
-            $request->safe($request->validated)
+            $request->validated()
         );
 
         return response()->json($result, Response::HTTP_CREATED);
@@ -50,7 +51,7 @@ class AccountsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id) : JsonResponse
     {
         $result = $this->service->getById($id);
 
@@ -60,7 +61,7 @@ class AccountsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAccountRequest $request, string $id)
+    public function update(UpdateAccountRequest $request, string $id) : JsonResponse
     {
         $result = $this->service->updateById(
             $id,
@@ -73,7 +74,7 @@ class AccountsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id) : JsonResponse
     {
         $result = $this->service->deleteById($id);
 
