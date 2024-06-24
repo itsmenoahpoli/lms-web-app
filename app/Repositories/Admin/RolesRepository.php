@@ -9,13 +9,11 @@ class RolesRepository extends BaseRepository
 {
     public function __construct(
         private readonly Model $model,
-        private readonly array $relationships = [])
-    {
-        parent::__construct($model, $relationships);
-    }
+        private readonly array $relationships = [],
+        private readonly array $shownRelationshipsInList = []
 
-    public function create($data)
+    )
     {
-        return 'bcrypt($data["password"])';
+        parent::__construct($model, $relationships, $shownRelationshipsInList);
     }
 }

@@ -9,9 +9,11 @@ class AccountsRepository extends BaseRepository
 {
     public function __construct(
         private readonly Model $model,
-        private readonly array $relationships = [])
+        private readonly array $relationships = [],
+        private readonly array $showRelationshipsInList = []
+    )
     {
-        parent::__construct($model, $relationships);
+        parent::__construct($model, $relationships, $showRelationshipsInList);
     }
 
     public function create($data)
@@ -19,5 +21,12 @@ class AccountsRepository extends BaseRepository
         $data['password'] = bcrypt($data['password']);
 
         return parent::create($data);
+    }
+
+    public function assignRole($accountId, $roleId)
+    {
+        return tap($this->model->query())->findOrFail($accountId)->update([
+            'user_role_id' => $roleId
+        ]);
     }
 }

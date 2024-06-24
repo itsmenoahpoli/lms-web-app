@@ -2,13 +2,13 @@
 
 namespace App\Services\Admin;
 
-use App\Models\User;
+use App\Models\UserRole;
 use App\Repositories\Admin\RolesRepository;
 
 class RolesService extends RolesRepository
 {
-    public function __construct(User $model)
+    public function __construct(UserRole $model)
     {
-        parent::__construct($model, ['users']);
+        parent::__construct($model, ['users'], []);
     }
 }

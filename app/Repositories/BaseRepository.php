@@ -12,21 +12,22 @@ class BaseRepository implements BaseRepositoryInterface
     public function __construct(
         private readonly Model $model,
         private readonly array $relationships,
+        private readonly array $showRelationshipsInList,
     )
     {
-        $this->eloquentModel = $this->model->with('user_role');
+        $this->eloquentModel = $this->model->query();
     }
 
     public function getPaginated($page = 1, $pageSize = 25, $orderBy = 'created_at', $sortBy = 'asc')
     {
-        $result = $this->eloquentModel->orderBy($orderBy, $sortBy)->paginate($pageSize);
+        $result = $this->eloquentModel->with($this->showRelationshipsInList)->orderBy($orderBy, $sortBy)->paginate($pageSize);
 
         return $result;
     }
 
     public function getUnpaginated($orderBy = 'id', $sortBy = 'desc')
     {
-        $result = $this->eloquentModel->orderBy($orderBy, $sortBy)->get();
+        $result = $this->eloquentModel->with($this->showRelationshipsInList)->orderBy($orderBy, $sortBy)->get();
 
         return $result;
     }

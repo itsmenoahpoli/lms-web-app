@@ -10,6 +10,7 @@ use App\Helpers\ParamsHelpers;
 use App\Services\Admin\AccountsService;
 use App\Http\Requests\Admin\User\CreateAccountRequest;
 use App\Http\Requests\Admin\User\UpdateAccountRequest;
+use App\Http\Requests\Admin\Account\AssignRoleRequest;
 
 class AccountsController extends Controller
 {
@@ -79,5 +80,15 @@ class AccountsController extends Controller
         $result = $this->service->deleteById($id);
 
         return response()->json($result, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * Assign role to account
+     */
+    public function assignRoleToAccount($accountId, $roleId)
+    {
+        $result = $this->service->assignRole($accountId, $roleId);
+
+        return response()->json($result, Response::HTTP_OK);
     }
 }

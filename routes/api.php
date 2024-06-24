@@ -34,5 +34,11 @@ Route::prefix('v1')->middleware('verify.api-key')->group(function () {
             'accounts' => AccountsController::class,
             'roles' => RolesController::class,
         ]);
+
+
+        /**
+         * Assign role to account
+         */
+        Route::patch('accounts/{accountId}role/assign/{userRoleId}', [AccountsController::class, 'assign_role_to_account']);
     });
 });
