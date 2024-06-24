@@ -10,7 +10,6 @@ use App\Helpers\ParamsHelpers;
 use App\Services\Admin\AccountsService;
 use App\Http\Requests\Admin\User\CreateAccountRequest;
 use App\Http\Requests\Admin\User\UpdateAccountRequest;
-use App\Http\Requests\Admin\Account\AssignRoleRequest;
 
 class AccountsController extends Controller
 {
