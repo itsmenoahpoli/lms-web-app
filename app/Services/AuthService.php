@@ -72,7 +72,7 @@ class AuthService {
 
     public function createOtp($payload)
     {
-        $user = $this->user->query()->where('email', $payload->email);
+        $user = $this->user->query()->where('email', $payload['email']);
 
         if (!$user) {
             throw new HttpException(404, 'USER_NOT_FOUND');
@@ -85,7 +85,7 @@ class AuthService {
 
         return $this->userOtp->query()->create([
             'code' => $code,
-            'expiresAt' => $expiresAt
+            'expires_at' => $expiresAt
         ]);
     }
 
