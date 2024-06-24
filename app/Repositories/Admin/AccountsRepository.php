@@ -29,4 +29,11 @@ class AccountsRepository extends BaseRepository
             'user_role_id' => $roleId
         ]);
     }
+
+    public function unassignRole($accountId)
+    {
+        return tap($this->model->query())->findOrFail($accountId)->update([
+            'user_role_id' => null
+        ]);
+    }
 }

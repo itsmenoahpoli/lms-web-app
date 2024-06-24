@@ -91,4 +91,11 @@ class AccountsController extends Controller
 
         return response()->json($result, Response::HTTP_OK);
     }
+
+    public function unassignRoleToAccount($accountId)
+    {
+        $result = $this->service->unassignRole($accountId);
+
+        return response()->json($result, Response::HTTP_OK);
+    }
 }

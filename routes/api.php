@@ -21,14 +21,21 @@ Route::prefix('v1')->middleware('verify.api-key')->group(function () {
     Route::get('healthcheck', [SystemController::class, 'healthcheck'])->name('api.healthcheck');
 
 
+    /**
+     * Auth Routes
+     */
     Route::prefix('auth')->group(function () {
         Route::post('login', [AuthController::class, 'login'])->name('auth.login');
+        Route::post('request-otp', [AuthController::class, 'requestOtp'])->name('auth.request-otp');
 
         Route::middleware('auth:sanctum')->group(function () {
             Route::post('logout', [AuthController::class, 'logout'])->name('auth.logout');
         });
     });
 
+    /**
+     * Admin Routes
+     */
     Route::prefix('admin')->middleware(['auth:sanctum', 'role.admin'])->group(function () {
         Route::apiResources([
             'accounts' => AccountsController::class,
@@ -39,6 +46,8 @@ Route::prefix('v1')->middleware('verify.api-key')->group(function () {
         /**
          * Assign role to account
          */
-        Route::patch('accounts/{accountId}role/assign/{userRoleId}', [AccountsController::class, 'assign_role_to_account']);
+        Route::patch('accounts/{accountId}role/assign/{userRoleId}', [AccountsController::class, 'assignRoleToAccount']);
+        Route::patch('accounts/{accountId}role/unassign', [AccountsController::class, 'unassignRoleToAccount']);
+
     });
 });

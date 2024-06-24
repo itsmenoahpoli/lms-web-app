@@ -34,4 +34,16 @@ class AccountsService extends AccountsRepository
 
         return parent::assignRole($accountId, $roleId);
     }
+
+    public function unassignRole($accountId)
+    {
+        $user = parent::getById($accountId);
+
+        if (!$user)
+        {
+            throw new NotFoundHttpException('ACCOUNT_NOT_FOUND');
+        }
+
+        return parent::unassignRole($accountId);
+    }
 }
