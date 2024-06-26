@@ -21,6 +21,13 @@ const SigninPage = LoadComponent(
   React.lazy(() => import("@/views/auth/SigninPage"))
 );
 
+/**
+ * Dashboard Pages
+ */
+const DashboardPage = LoadComponent(
+  React.lazy(() => import("@/views/dashboard/OverviewPage"))
+);
+
 export default createBrowserRouter([
   {
     path: "*",
@@ -37,6 +44,16 @@ export default createBrowserRouter([
       {
         path: "/auth/signin",
         element: SigninPage,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
+      {
+        path: "/dashboard/overview",
+        element: DashboardPage,
       },
     ],
   },

@@ -11,7 +11,7 @@ export const AuthLayout: React.FC = () => {
         alt="brand-logo.png"
         className="h-[80px] w-[150px] mb-10"
       />
-      <Card className="w-[300px] bg-slate-900 border border-slate-800">
+      <Card className="w-[400px] bg-slate-900 border border-slate-800">
         <Outlet />
       </Card>
 
