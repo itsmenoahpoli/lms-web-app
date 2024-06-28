@@ -35,7 +35,7 @@ export const DashboardLayout: React.FC = () => {
     <div className="w-screen h-screen relative">
       <div className="w-[300px] h-screen bg-slate-950 fixed top-0 left-0">
         <div className="w-full h-[60px] flex flex-row justify-center items-center gap-x-1 mb-5">
-          <h1 className="text-white text-lg font-medium">DentalEase</h1>
+          {/* <h1 className="text-white text-lg font-medium">DentalEase</h1> */}
         </div>
 
         <div className="flex flex-col gap-y-3 px-5">
@@ -72,15 +72,15 @@ export const DashboardLayout: React.FC = () => {
         </div>
       </div>
 
-      <div className="w-full h-screen bg-slate-900 ml-[300px]">
+      <div className="h-screen bg-slate-100 ml-[300px]">
         <div
-          className="w-full h-[50px] flex items-center border-gray-800 px-5"
+          className="w-full h-[50px] flex items-center border-gray-200 px-5"
           style={{ borderBottomWidth: "1px" }}
         >
           <Breadcrumb items={paths} />
         </div>
 
-        <div className="text-white p-5">
+        <div className="p-5">
           <Outlet />
         </div>
       </div>

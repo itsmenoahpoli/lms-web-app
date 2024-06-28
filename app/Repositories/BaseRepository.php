@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Repositories\BaseRepositoryInterface;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class BaseRepository implements BaseRepositoryInterface
 {
@@ -13,9 +14,24 @@ class BaseRepository implements BaseRepositoryInterface
         private readonly Model $model,
         private readonly array $relationships,
         private readonly array $showRelationshipsInList,
+        private readonly array $searchFilters = [],
+        private readonly array $sortFilters = [],
+
     )
     {
         $this->eloquentModel = $this->model->query();
+    }
+
+    public function getListUsingQueryBuilder()
+    {
+        $result = QueryBuilder::for($this->eloquentModel)
+                ->allowedFilters($this->searchFilters)
+                ->defaultSort('-id')
+                ->allowedSorts($this->sortFilters)
+                ->allowedIncludes($this->relationships)
+                ->get();
+
+        return $result;
     }
 
     public function getPaginated($page = 1, $pageSize = 25, $orderBy = 'created_at', $sortBy = 'asc')

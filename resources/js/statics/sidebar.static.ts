@@ -29,6 +29,10 @@ export default [
     groupName: "Admin Utilities",
     items: [
       {
+        label: "Roles Access",
+        url: "/dashboard/admin/roles/manage",
+      },
+      {
         label: "Teacher Accounts",
         url: "/dashboard/overview",
       },

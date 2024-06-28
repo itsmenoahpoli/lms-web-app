@@ -14,6 +14,11 @@ class RolesRepository extends BaseRepository
 
     )
     {
-        parent::__construct($model, $relationships, $shownRelationshipsInList);
+        parent::__construct(
+            $model,
+            $relationships,
+            $shownRelationshipsInList,
+            ['name']
+        );
     }
 }

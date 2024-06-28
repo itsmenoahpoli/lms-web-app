@@ -35,6 +35,9 @@ const TeacherManageActivitiesPage = LoadComponent(
       )
   )
 );
+const AdminManageRolesPage = LoadComponent(
+  React.lazy(() => import("@/views/dashboard/admin/roles/ManageRolesPage"))
+);
 
 export default createBrowserRouter([
   {
@@ -63,9 +66,21 @@ export default createBrowserRouter([
         path: "/dashboard/overview",
         element: DashboardPage,
       },
+
+      /**
+       * Teacher
+       */
       {
         path: "/dashboard/teacher/activities/manage",
         element: TeacherManageActivitiesPage,
+      },
+
+      /**
+       * Admin
+       */
+      {
+        path: "/dashboard/admin/roles/manage",
+        element: AdminManageRolesPage,
       },
     ],
   },
