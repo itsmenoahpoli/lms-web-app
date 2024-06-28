@@ -27,6 +27,14 @@ const SigninPage = LoadComponent(
 const DashboardPage = LoadComponent(
   React.lazy(() => import("@/views/dashboard/OverviewPage"))
 );
+const TeacherManageActivitiesPage = LoadComponent(
+  React.lazy(
+    () =>
+      import(
+        "@/views/dashboard/teacher/academics/activities/ManageActivitiesPage"
+      )
+  )
+);
 
 export default createBrowserRouter([
   {
@@ -54,6 +62,10 @@ export default createBrowserRouter([
       {
         path: "/dashboard/overview",
         element: DashboardPage,
+      },
+      {
+        path: "/dashboard/teacher/activities/manage",
+        element: TeacherManageActivitiesPage,
       },
     ],
   },

@@ -31,6 +31,16 @@
     }
 }
 
+.ant-breadcrumb {
+    font-size: 12px !important;
+    text-transform: capitalize !important;
+
+    &-link,
+    &-separator {
+        color: #999 !important;
+    }
+}
+
 .ant-input,
 .ant-select {
     width: 100% !important;
