@@ -22,7 +22,10 @@ class CreateLectureRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name'          => 'string|required',
+            'description'   => 'string|required',
+            'file'          => 'nullable|mimes:jpg,jpeg,png',
+            'is_posted'     => 'nullable|boolean'
         ];
     }
 }

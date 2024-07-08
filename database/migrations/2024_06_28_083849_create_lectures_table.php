@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('lecture_no')->unique();
             $table->string('name');
-            $table->string('name-slug')->unique();
+            $table->string('name_slug')->unique();
             $table->text('description');
             $table->string('file')->nullable();
             $table->boolean('is_posted')->default(false);
