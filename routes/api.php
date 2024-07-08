@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\SystemController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\Admin\AccountsController;
 use App\Http\Controllers\Api\Admin\RolesController;
+use App\Http\Controllers\Api\Teacher\LecturesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,14 @@ Route::prefix('v1')->middleware('verify.api-key')->group(function () {
          */
         Route::patch('accounts/{accountId}role/assign/{userRoleId}', [AccountsController::class, 'assignRoleToAccount']);
         Route::patch('accounts/{accountId}role/unassign', [AccountsController::class, 'unassignRoleToAccount']);
+    });
 
+    /**
+     * Teacher Routes
+     */
+    Route::prefix('teacher')->middleware(['role.teacher'])->group(function () {
+        Route::apiResources([
+            'lectures' => LecturesController::class,
+        ]);
     });
 });

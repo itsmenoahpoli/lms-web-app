@@ -16,7 +16,7 @@ class VerifyRoleAdmin
     public function handle(Request $request, Closure $next): Response
     {
         if ($request->user()->user_role->name !== "superadmin") {
-            return response()->json('UNAUTHORIZED', Response::HTTP_UNAUTHORIZED);
+            return response()->json('FORBIDDEN', Response::HTTP_FORBIDDEN);
         }
 
         return $next($request);

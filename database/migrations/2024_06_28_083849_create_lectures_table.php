@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('name-slug')->unique();
             $table->text('description');
+            $table->string('file')->nullable();
             $table->boolean('is_posted')->default(false);
             $table->timestamps();
         });
