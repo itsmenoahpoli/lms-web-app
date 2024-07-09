@@ -74,7 +74,7 @@ export const DashboardLayout: React.FC = () => {
 
       <div className="h-screen bg-slate-100 ml-[300px]">
         <div
-          className="w-full h-[50px] flex items-center border-gray-200 px-5"
+          className="w-full h-[50px] bg-white flex items-center border-gray-200 px-5"
           style={{ borderBottomWidth: "1px" }}
         >
           <Breadcrumb items={paths} />
