@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Button, Table, type TableColumnsType } from "antd";
 import { PageHeader } from "@/components/shared";
 import { LecturesService } from "@/services";
+import ButtonGroup from "antd/es/button/button-group";
 
 const ManageLecturesPage: React.FC = () => {
   const { isLoading, data } = useQuery({
@@ -20,18 +21,25 @@ const ManageLecturesPage: React.FC = () => {
       dataIndex: "description",
     },
     {
-      title: "",
+      title: "...",
       dataIndex: "id",
       align: "right",
       render: (id: number) => {
-        return id;
+        return (
+          <ButtonGroup>
+            <Button>Edit</Button>
+            <Button type="primary" danger>
+              Delete
+            </Button>
+          </ButtonGroup>
+        );
       },
     },
   ];
   return (
     <>
       <PageHeader title="Lectures" subtitle="Manage students lectures">
-        <Button type="primary" className="h-[40px]">
+        <Button type="default" className="h-[40px] border border-gray-300">
           Create Lecture
         </Button>
       </PageHeader>
