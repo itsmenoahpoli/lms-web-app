@@ -1,9 +1,8 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Button, Table, type TableColumnsType } from "antd";
+import { Button, Table, Space type TableColumnsType } from "antd";
 import { PageHeader } from "@/components/shared";
 import { LecturesService } from "@/services";
-import ButtonGroup from "antd/es/button/button-group";
 
 const ManageLecturesPage: React.FC = () => {
   const { isLoading, data } = useQuery({
@@ -21,17 +20,29 @@ const ManageLecturesPage: React.FC = () => {
       dataIndex: "description",
     },
     {
+      title: "Status",
+      dataIndex: "is_posted",
+    },
+    {
+      title: "Date Created",
+      dataIndex: "created_at",
+    },
+    {
+      title: "Last Updated",
+      dataIndex: "updated_at",
+    },
+    {
       title: "...",
       dataIndex: "id",
       align: "right",
       render: (id: number) => {
         return (
-          <ButtonGroup>
+          <Space direction="horizontal">
             <Button>Edit</Button>
             <Button type="primary" danger>
               Delete
             </Button>
-          </ButtonGroup>
+          </Space>
         );
       },
     },

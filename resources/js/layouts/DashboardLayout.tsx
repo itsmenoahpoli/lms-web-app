@@ -56,7 +56,7 @@ export const DashboardLayout: React.FC = () => {
 
   return (
     <div className="w-screen h-screen relative">
-      <div className="w-[300px] h-screen bg-slate-950 fixed top-0 left-0">
+      <div className="w-[300px] h-screen bg-green-950 fixed top-0 left-0">
         <div className="w-full flex flex-row justify-center items-center gap-x-1 mt-10 mb-5">
           {/* <h1 className="text-white text-lg font-medium">DentalEase</h1> */}
           <img
@@ -72,7 +72,7 @@ export const DashboardLayout: React.FC = () => {
             <div className="flex flex-col gap-y-2 mt-2">
               <Link
                 to="/dashboard/overview"
-                className="text-xs text-gray-300 hover:text-white hover:bg-slate-900 rounded-md py-3 px-3"
+                className="text-xs text-gray-300 hover:text-white hover:bg-green-900 rounded-md py-3 px-3"
               >
                 Dashboard Overview
               </Link>
@@ -89,7 +89,7 @@ export const DashboardLayout: React.FC = () => {
                   <Link
                     to={item.url}
                     key={`sidebar-link-group-link-item-${index}`}
-                    className="text-xs text-gray-300 hover:text-white hover:bg-slate-900 rounded-md py-3 px-3"
+                    className="text-xs text-gray-300 hover:text-white hover:bg-green-900 rounded-md py-3 px-3"
                   >
                     {item.label}
                   </Link>

@@ -16,6 +16,17 @@ export const LecturesService = {
       .catch(() => toast.error("Failed to fetch lecture"));
   },
 
+  deleteLecture: async function (id: number) {
+    return await httpClient
+      .delete("/teacher/lectures/" + id)
+      .then((response) => {
+        toast.success("Lecture successfully deleted");
+
+        return response.data;
+      })
+      .catch(() => toast.error("Failed to delete lecture"));
+  },
+
   createLecture: async function (data: any) {
     let formData = new FormData();
 
