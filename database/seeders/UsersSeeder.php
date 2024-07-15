@@ -21,9 +21,14 @@ class UsersSeeder extends Seeder
             User::query()->create([
                 'user_role_id'  => $role->id,
                 'name'          => $role->name.' Account',
-                'email'         => $role->name.'@domain.com',
-                'password'      => bcrypt($role->name.'password')
+                'email'         => $role->name.'email@domain.com',
+                'password'      => bcrypt($role->name.'pass')
             ]);
         }
+
+        // adminemail@domain.com adminpass
+        // teacheremail@domain.com teacherpass
+        // studentemail@domain.com studentpass
+
     }
 }

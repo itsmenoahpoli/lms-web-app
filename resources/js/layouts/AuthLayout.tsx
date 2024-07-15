@@ -5,13 +5,13 @@ import LOGO from "@/assets/dep-ed-logo.png";
 
 export const AuthLayout: React.FC = () => {
   return (
-    <div className="w-screen h-screen flex flex-col gap-y-4 justify-center items-center bg-slate-950 relative">
+    <div className="w-screen h-screen flex flex-col gap-y-4 justify-center items-center bg-slate-100 relative">
       <img
         src={LOGO}
         alt="brand-logo.png"
         className="h-[80px] w-[150px] mb-10"
       />
-      <Card className="w-[400px] bg-slate-900 border border-slate-800">
+      <Card className="w-[400px] bg-white shadow">
         <Outlet />
       </Card>
 

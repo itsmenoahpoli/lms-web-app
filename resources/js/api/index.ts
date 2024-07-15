@@ -19,6 +19,10 @@ instance.interceptors.request.use(
     config.headers["Accept"] = "application/json";
     config.headers["Content-Type"] = "application/json";
 
+    // prettier-ignore
+    // @ts-ignore
+    config.headers["X-API-KEY"] = "ac531a937f740242868895cbf80855691d19fac1d42336952c8b3518fdecf7841cffe026e6a4174d8332d331d6aa27a591e03e7e670969c43fcfbfff4c714ce9";
+
     return config;
   },
   (error: AxiosError): Promise<AxiosError> => {

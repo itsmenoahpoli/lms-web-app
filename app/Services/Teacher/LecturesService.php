@@ -11,4 +11,15 @@ class LecturesService extends LecturesRepository
     {
         parent::__construct($model, [], []);
     }
+
+    public function create($payload, $file = null)
+    {
+        if ($file)
+        {
+            $path = $file->store('lectures/files', 'public');
+            $payload['file'] = asset($path);
+        }
+
+        return parent::create($payload);
+    }
 }

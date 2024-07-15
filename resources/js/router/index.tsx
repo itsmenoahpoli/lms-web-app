@@ -27,6 +27,10 @@ const SigninPage = LoadComponent(
 const DashboardPage = LoadComponent(
   React.lazy(() => import("@/views/dashboard/OverviewPage"))
 );
+
+/**
+ * Teachers Pages
+ */
 const TeacherManageActivitiesPage = LoadComponent(
   React.lazy(
     () =>
@@ -35,6 +39,32 @@ const TeacherManageActivitiesPage = LoadComponent(
       )
   )
 );
+const TeacherManageLecturesPage = LoadComponent(
+  React.lazy(
+    () =>
+      import("@/views/dashboard/teacher/academics/lectures/ManageLecturesPage")
+  )
+);
+const TeacherManageQuizsesPage = LoadComponent(
+  React.lazy(
+    () =>
+      import("@/views/dashboard/teacher/academics/quizses/ManageQuizsesPage")
+  )
+);
+const TeacherManageExamsPage = LoadComponent(
+  React.lazy(
+    () => import("@/views/dashboard/teacher/academics/exams/ManageExamsPage")
+  )
+);
+const TeacherManageStudentsPage = LoadComponent(
+  React.lazy(
+    () => import("@/views/dashboard/teacher/students/ManageStudentsPage")
+  )
+);
+
+/**
+ * Admin Pages
+ */
 const AdminManageRolesPage = LoadComponent(
   React.lazy(() => import("@/views/dashboard/admin/roles/ManageRolesPage"))
 );
@@ -46,7 +76,11 @@ export default createBrowserRouter([
   },
   {
     path: "/",
-    element: <Navigate to="/auth/signin" />,
+    element: <Navigate to="/dashboard/overview" />,
+  },
+  {
+    path: "/dashboard",
+    element: <Navigate to="/dashboard/overview" />,
   },
   {
     path: "/auth",
@@ -73,6 +107,22 @@ export default createBrowserRouter([
       {
         path: "/dashboard/teacher/activities/manage",
         element: TeacherManageActivitiesPage,
+      },
+      {
+        path: "/dashboard/teacher/lectures/manage",
+        element: TeacherManageLecturesPage,
+      },
+      {
+        path: "/dashboard/teacher/quizses/manage",
+        element: TeacherManageQuizsesPage,
+      },
+      {
+        path: "/dashboard/teacher/exams/manage",
+        element: TeacherManageExamsPage,
+      },
+      {
+        path: "/dashboard/teacher/students/manage",
+        element: TeacherManageStudentsPage,
       },
 
       /**

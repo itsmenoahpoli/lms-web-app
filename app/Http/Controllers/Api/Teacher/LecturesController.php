@@ -42,7 +42,8 @@ class LecturesController extends Controller
     public function store(CreateLectureRequest $request)
     {
         $result = $this->service->create(
-            $request->validated()
+            $request->validated(),
+            $request->file('file')
         );
 
         return response()->json($result, Response::HTTP_CREATED);

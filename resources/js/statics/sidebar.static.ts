@@ -3,16 +3,20 @@ export default [
     groupName: "Academics",
     items: [
       {
-        label: "Manage Activities",
-        url: "/dashboard/teacher/activities/manage",
+        label: "Manage Lectures",
+        url: "/dashboard/teacher/lectures/manage",
       },
       {
         label: "Manage Quizses",
-        url: "/dashboard/overview",
+        url: "/dashboard/teacher/quizses/manage",
       },
       {
         label: "Manage Exams",
-        url: "/dashboard/overview",
+        url: "/dashboard/teacher/exams/manage",
+      },
+      {
+        label: "Manage Lab Activities",
+        url: "/dashboard/teacher/activities/manage",
       },
     ],
   },
@@ -21,7 +25,7 @@ export default [
     items: [
       {
         label: "Manage Students",
-        url: "/dashboard/overview",
+        url: "/dashboard/teacher/students/manage",
       },
     ],
   },
@@ -29,12 +33,12 @@ export default [
     groupName: "Admin Utilities",
     items: [
       {
-        label: "Roles Access",
+        label: "Roles Management",
         url: "/dashboard/admin/roles/manage",
       },
       {
         label: "Teacher Accounts",
-        url: "/dashboard/overview",
+        url: "/dashboard/admin/accounts/teachers/manage",
       },
     ],
   },

@@ -75,11 +75,10 @@ a {
     @apply text-blue-300;
 }
 
-input,
-button {
-    @apply w-full h-[35px] bg-slate-900 border border-slate-600 rounded text-white text-xs focus:border-slate-600 px-3;
+input {
+    @apply w-full h-[35px] bg-white border border-gray-200 rounded text-xs focus:border-slate-600 px-3;
 }
 
-button {
-    @apply bg-blue-800 hover:bg-blue-600;
+.dashboard-layout-content {
+    zoom: 0.9;
 }
