@@ -8,6 +8,7 @@ import {
   Space,
   Input,
   Select,
+  Modal,
   type TableColumnsType,
 } from "antd";
 import { IoCloudDownloadOutline, IoCopyOutline } from "react-icons/io5";
@@ -19,16 +20,34 @@ import { getPopupContainer } from "@/utils/select.util";
 import type { Lecture } from "@/types/models";
 
 const ManageLecturesPage: React.FC = () => {
+  const [modal, context] = Modal.useModal();
+  const [filters, setFilters] = React.useState();
+
   const { isLoading, data } = useQuery({
     queryKey: ["data-lectures"],
     queryFn: async () => await LecturesService.getLecturesList(),
   });
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+
+    console.log(value);
+  };
+
+  const handleFilter = (status: string | boolean) => {
+    console.log(status);
+  };
 
   const handleEdit = (id: number) => {
     console.log(id);
   };
 
   const handleDelete = (id: number) => {
+    modal.confirm({
+      title: "Do you confirm to delete this record?",
+      onOk: async () => await LecturesService.deleteLecture(id),
+    });
+
     console.log(id);
   };
 
@@ -116,6 +135,7 @@ const ManageLecturesPage: React.FC = () => {
 
   return (
     <>
+      {context}
       <PageHeader title="Lectures" subtitle="Manage students lectures">
         <Link to="/dashboard/teacher/lectures/create">
           <Button type="primary" className="h-[40px]">
@@ -125,8 +145,12 @@ const ManageLecturesPage: React.FC = () => {
       </PageHeader>
 
       <Space direction="vertical" size="middle" className="w-full mt-2">
-        <div className="flex flex-row gap-2 w-3/4">
-          <Input className="w-full" placeholder="Search" />
+        <div className="flex flex-row gap-2 w-1/2">
+          <Input
+            className="w-full"
+            placeholder="Search"
+            onChange={handleSearch}
+          />
           <Select
             className="w-full"
             placeholder="Filter by status"
