@@ -8,8 +8,8 @@ const ManageLecturesPage: React.FC = () => {
     <>
       <PageHeader title="Lectures" subtitle="Manage students lectures" />
 
-      <Card>
-        <LectureForm />
+      <Card className="w-1/2">
+        <LectureForm type="add" />
       </Card>
     </>
   );

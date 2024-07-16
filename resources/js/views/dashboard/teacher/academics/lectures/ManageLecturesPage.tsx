@@ -1,10 +1,21 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { Button, Table, Space, type TableColumnsType } from "antd";
+import {
+  Alert,
+  Button,
+  Table,
+  Space,
+  Input,
+  Select,
+  type TableColumnsType,
+} from "antd";
+import { IoCloudDownloadOutline, IoCopyOutline } from "react-icons/io5";
 import { PageHeader } from "@/components/shared";
 import { LecturesService } from "@/services";
 import { formatDate } from "@/utils/date.util";
+import { copyToClipboard } from "@/utils/string.util";
+import { getPopupContainer } from "@/utils/select.util";
 import type { Lecture } from "@/types/models";
 
 const ManageLecturesPage: React.FC = () => {
@@ -31,12 +42,49 @@ const ManageLecturesPage: React.FC = () => {
       dataIndex: "description",
     },
     {
+      title: "Module URL",
+      dataIndex: "file",
+      render: (file: string) => {
+        return (
+          <Space direction="horizontal">
+            <Button
+              className="text-xs"
+              onClick={() =>
+                copyToClipboard(file, "File url copied to clipboard!")
+              }
+            >
+              Copy <IoCopyOutline />
+            </Button>
+            <a href={file} target="_blank">
+              <Button className="text-xs">
+                Download <IoCloudDownloadOutline />
+              </Button>
+            </a>
+          </Space>
+        );
+      },
+    },
+    {
       title: "Status",
       dataIndex: "is_posted",
+      render: (is_posted: boolean) => {
+        const status = {
+          message: is_posted ? "POSTED" : "DRAFT",
+          type: (is_posted ? "success" : "warning") as any,
+        };
+        return (
+          <Alert
+            className="text-xs text-center font-bold"
+            type={status.type}
+            message={status.message}
+          />
+        );
+      },
     },
     {
       title: "Date Created",
       dataIndex: "created_at",
+      align: "right",
       render: (created_at: string) => {
         return formatDate(created_at);
       },
@@ -44,6 +92,7 @@ const ManageLecturesPage: React.FC = () => {
     {
       title: "Last Updated",
       dataIndex: "updated_at",
+      align: "right",
       render: (updated_at: string) => {
         return formatDate(updated_at);
       },
@@ -75,9 +124,22 @@ const ManageLecturesPage: React.FC = () => {
         </Link>
       </PageHeader>
 
-      {!isLoading && data ? (
-        <Table dataSource={data} columns={tableColumns} />
-      ) : null}
+      <Space direction="vertical" size="middle" className="w-full mt-2">
+        <div className="flex flex-row gap-2 w-3/4">
+          <Input className="w-full" placeholder="Search" />
+          <Select
+            className="w-full"
+            placeholder="Filter by status"
+            getPopupContainer={getPopupContainer}
+          />
+        </div>
+        <Table
+          dataSource={data}
+          columns={tableColumns}
+          rowKey={"id"}
+          loading={isLoading}
+        />
+      </Space>
     </>
   );
 };

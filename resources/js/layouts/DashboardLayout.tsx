@@ -44,6 +44,11 @@ export const DashboardLayout: React.FC = () => {
     return logoutSession();
   };
 
+  const isActive = (pathname: string) => {
+    console.log(window.location.pathname.includes(pathname));
+    return window.location.pathname.includes(pathname);
+  };
+
   React.useEffect(() => {
     createBreadcrumbLinks();
   }, [location.pathname]);
@@ -74,7 +79,8 @@ export const DashboardLayout: React.FC = () => {
             <div className="flex flex-col gap-y-2 mt-2">
               <Link
                 to="/dashboard/overview"
-                className="text-xs text-gray-300 hover:text-white hover:bg-blue-800 rounded-md py-3 px-3"
+                // prettier-ignore
+                className={`text-xs text-gray-300 hover:text-white hover:bg-blue-800 rounded-md py-3 px-3 ${isActive(  "/dashboard/overview") ? '!bg-blue-800' : ''}`}
               >
                 Dashboard Overview
               </Link>
@@ -91,7 +97,8 @@ export const DashboardLayout: React.FC = () => {
                   <Link
                     to={item.url}
                     key={`sidebar-link-group-link-item-${index}`}
-                    className="text-xs text-gray-300 hover:text-white hover:bg-blue-800 rounded-md py-3 px-3"
+                    // prettier-ignore
+                    className={`text-xs text-gray-300 hover:text-white hover:bg-blue-800 rounded-md py-3 px-3 ${isActive(item.url) ? '!bg-blue-800' : ''}`}
                   >
                     {item.label}
                   </Link>
