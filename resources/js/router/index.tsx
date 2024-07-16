@@ -45,6 +45,11 @@ const TeacherManageLecturesPage = LoadComponent(
       import("@/views/dashboard/teacher/academics/lectures/ManageLecturesPage")
   )
 );
+const TeacherLectureFormPage = LoadComponent(
+  React.lazy(
+    () => import("@/views/dashboard/teacher/academics/lectures/LectureFormPage")
+  )
+);
 const TeacherManageQuizsesPage = LoadComponent(
   React.lazy(
     () =>
@@ -111,6 +116,10 @@ export default createBrowserRouter([
       {
         path: "/dashboard/teacher/lectures/manage",
         element: TeacherManageLecturesPage,
+      },
+      {
+        path: "/dashboard/teacher/lectures/create",
+        element: TeacherLectureFormPage,
       },
       {
         path: "/dashboard/teacher/quizses/manage",

@@ -1,5 +1,5 @@
 import React from "react";
-import { SigninForm } from "@/components";
+import { SigninForm } from "@/components/domains";
 
 const SigninPage: React.FC = () => {
   return (
