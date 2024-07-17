@@ -11,7 +11,7 @@ class CreateLectureQuizRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class CreateLectureQuizRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'lecture_id'        => 'int|required',
+            'title'             => 'string|required',
+            'description'       => 'string|nullable',
+            'questions'         => 'array|required',
+            'question.*.title'  => 'string|required',
+            'question.*.answer' => 'string|required',
         ];
     }
 }
