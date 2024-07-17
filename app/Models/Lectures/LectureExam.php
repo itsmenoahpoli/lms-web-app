@@ -4,16 +4,17 @@ namespace App\Models\Lectures;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Lecture extends Model
+
+class LectureExam extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    public function lecture_quizses() : HasMany
+    public function lecture() : BelongsTo
     {
-        return $this->hasMany(\App\Models\Lectures\LectureQuiz::class);
+        return $this->belongsTo(\App\Models\Lectures\Lecture::class);
     }
 }
