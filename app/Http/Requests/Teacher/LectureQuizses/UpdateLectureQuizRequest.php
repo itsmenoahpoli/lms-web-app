@@ -22,7 +22,12 @@ class UpdateLectureQuizRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'lecture_id'            => 'int|required',
+            'title'                 => 'string|required',
+            'description'           => 'string|nullable',
+            'questions'             => 'array|required',
+            'questions.*.title'     => 'string|required',
+            'questions.*.answer'    => 'string|required',
         ];
     }
 }
