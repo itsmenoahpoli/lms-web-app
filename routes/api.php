@@ -11,6 +11,8 @@ use App\Http\Controllers\Api\Admin\RolesController;
  */
 use App\Http\Controllers\Api\Teacher\LecturesController;
 use App\Http\Controllers\Api\Teacher\LectureQuizsesController;
+use App\Http\Controllers\Api\Teacher\LectureExamsController;
+use App\Http\Controllers\Api\Teacher\LectureLaboratoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,8 +63,10 @@ Route::prefix('v1')->middleware('verify.api-key')->group(function () {
      */
     Route::prefix('teacher')->middleware(['role.teacher'])->group(function () {
         Route::apiResources([
-            'lectures'          => LecturesController::class,
-            'lecture-quizses'   => LectureQuizsesController::class,
+            'lectures'              => LecturesController::class,
+            'lecture-quizses'       => LectureQuizsesController::class,
+            'lecture-exams'         => LectureExamsController::class,
+            'lecture-laboratories'  => LectureLaboratoriesController::class,
 
         ]);
     });

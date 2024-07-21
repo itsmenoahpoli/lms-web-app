@@ -10,6 +10,8 @@ class LectureQuiz extends Model
 {
     use HasFactory;
 
+    protected $table = 'lecture_quizses';
+
     protected $guarded = [];
 
     public function lecture() : BelongsTo

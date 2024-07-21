@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title')->unique();
             $table->string('title_slug')->unique();
             $table->text('description')->nullable();
-            $table->longText('questions');
+            $table->text('instructions');
             $table->enum('status', ['draft', 'published']);
             $table->timestamps();
         });

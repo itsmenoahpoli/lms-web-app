@@ -11,6 +11,8 @@ class LectureLaboratory extends Model
 {
     use HasFactory;
 
+    protected $table = 'lecture_laboratories';
+
     protected $guarded = [];
 
     public function lecture() : BelongsTo
