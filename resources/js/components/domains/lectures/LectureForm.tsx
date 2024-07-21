@@ -31,6 +31,9 @@ export const LectureForm: React.FC<{ type: "add" | "update" }> = (props) => {
 
   return (
     <Form layout="vertical" onFinish={handleFormSubmit} requiredMark>
+      <Form.Item label="Week" name="week_no" required>
+        <Input placeholder="Enter week" />
+      </Form.Item>
       <Form.Item label="Name" name="name" required>
         <Input placeholder="Enter lecture name" />
       </Form.Item>

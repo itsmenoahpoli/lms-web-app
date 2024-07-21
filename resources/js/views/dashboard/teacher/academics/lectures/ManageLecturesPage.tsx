@@ -47,8 +47,6 @@ const ManageLecturesPage: React.FC = () => {
       title: "Do you confirm to delete this record?",
       onOk: async () => await LecturesService.deleteLecture(id),
     });
-
-    console.log(id);
   };
 
   const tableColumns: TableColumnsType<Lecture> = [
@@ -145,17 +143,23 @@ const ManageLecturesPage: React.FC = () => {
       </PageHeader>
 
       <Space direction="vertical" size="middle" className="w-full mt-2">
-        <div className="flex flex-row gap-2 w-1/2">
-          <Input
-            className="w-full"
-            placeholder="Search"
-            onChange={handleSearch}
-          />
-          <Select
-            className="w-full"
-            placeholder="Filter by status"
-            getPopupContainer={getPopupContainer}
-          />
+        <div className="flex flex-row justify-between">
+          <div className="flex flex-row gap-x-3 text-sm">
+            <p>Posted (32)</p>
+            <p>Draft (16)</p>
+          </div>
+          <div className="flex flex-row gap-2 w-1/2">
+            <Input
+              className="w-full"
+              placeholder="Search"
+              onChange={handleSearch}
+            />
+            <Select
+              className="w-full"
+              placeholder="Filter by status"
+              getPopupContainer={getPopupContainer}
+            />
+          </div>
         </div>
         <Table
           dataSource={data}
