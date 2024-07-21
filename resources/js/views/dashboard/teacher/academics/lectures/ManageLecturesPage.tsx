@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Alert,
   Button,
@@ -11,7 +11,12 @@ import {
   Modal,
   type TableColumnsType,
 } from "antd";
-import { IoCloudDownloadOutline, IoCopyOutline } from "react-icons/io5";
+import {
+  IoCloudDownloadOutline,
+  IoCopyOutline,
+  IoPencilOutline,
+  IoTrashOutline,
+} from "react-icons/io5";
 import { PageHeader } from "@/components/shared";
 import { LecturesService } from "@/services";
 import { formatDate } from "@/utils/date.util";
@@ -23,7 +28,8 @@ const ManageLecturesPage: React.FC = () => {
   const [modal, context] = Modal.useModal();
   const [filters, setFilters] = React.useState();
 
-  const { isLoading, data } = useQuery({
+  const navigate = useNavigate();
+  const { isLoading, data, refetch } = useQuery({
     queryKey: ["data-lectures"],
     queryFn: async () => await LecturesService.getLecturesList(),
   });
@@ -39,13 +45,14 @@ const ManageLecturesPage: React.FC = () => {
   };
 
   const handleEdit = (id: number) => {
-    console.log(id);
+    return navigate(`/dashboard/teacher/lectures/edit/${id}`);
   };
 
   const handleDelete = (id: number) => {
     modal.confirm({
       title: "Do you confirm to delete this record?",
-      onOk: async () => await LecturesService.deleteLecture(id),
+      onOk: async () =>
+        await LecturesService.deleteLecture(id).then(() => refetch()),
     });
   };
 
@@ -82,6 +89,10 @@ const ManageLecturesPage: React.FC = () => {
       },
     },
     {
+      title: "Week No.",
+      dataIndex: "week_number",
+    },
+    {
       title: "Status",
       dataIndex: "is_posted",
       render: (is_posted: boolean) => {
@@ -91,7 +102,24 @@ const ManageLecturesPage: React.FC = () => {
         };
         return (
           <Alert
-            className="text-xs text-center font-bold"
+            className="text-xs text-center font-bold w-[100px]"
+            type={status.type}
+            message={status.message}
+          />
+        );
+      },
+    },
+    {
+      title: "Submission Status",
+      dataIndex: "is_posted",
+      render: (is_posted: boolean) => {
+        const status = {
+          message: is_posted ? "OPEN" : "CLOSED",
+          type: (is_posted ? "success" : "error") as any,
+        };
+        return (
+          <Alert
+            className="text-xs text-center font-bold w-[100px]"
             type={status.type}
             message={status.message}
           />
@@ -121,9 +149,11 @@ const ManageLecturesPage: React.FC = () => {
       render: (id: number) => {
         return (
           <Space direction="horizontal">
-            <Button onClick={() => handleEdit(id)}>Edit</Button>
+            <Button onClick={() => handleEdit(id)}>
+              <IoPencilOutline />
+            </Button>
             <Button type="primary" onClick={() => handleDelete(id)} danger>
-              Delete
+              <IoTrashOutline />
             </Button>
           </Space>
         );

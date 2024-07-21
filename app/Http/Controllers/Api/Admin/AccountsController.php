@@ -65,7 +65,7 @@ class AccountsController extends Controller
     {
         $result = $this->service->updateById(
             $id,
-            $request->safe($request->validated)
+            $request->validated()
         );
 
         return response()->json($result, Response::HTTP_OK);

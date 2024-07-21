@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('lectures', function (Blueprint $table) {
-            //
+            $table->integer('week_number')->after('id');
+            $table->boolean('is_submission_open')->after('is_posted');
         });
     }
 
@@ -22,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('lectures', function (Blueprint $table) {
-            //
+            $table->dropColumn(['week_number', 'is_submission_open']);
         });
     }
 };

@@ -22,10 +22,12 @@ class CreateLectureRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'          => 'string|required|unique:lectures',
-            'description'   => 'string|required',
-            'file'          => 'nullable',
-            'is_posted'     => 'nullable|boolean'
+            'week_number'           => 'int|required',
+            'name'                  => 'string|required|unique:lectures',
+            'description'           => 'string|required',
+            'file'                  => 'nullable',
+            'is_posted'             => 'nullable|boolean',
+            'is_submission_open'    => 'nullable|boolean'
         ];
     }
 }

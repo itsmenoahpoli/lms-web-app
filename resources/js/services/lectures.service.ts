@@ -27,6 +27,18 @@ export const LecturesService = {
       .catch(() => toast.error("Failed to delete lecture"));
   },
 
+  updateLecture: async function (id: number, data: any) {
+    console.log("data", data);
+    return await httpClient
+      .patch("/teacher/lectures/" + id, data)
+      .then((response) => {
+        toast.success("Lecture successfully updated");
+
+        return response.data;
+      })
+      .catch(() => toast.error("Failed to update lecture"));
+  },
+
   createLecture: async function (data: any) {
     let formData = new FormData();
 

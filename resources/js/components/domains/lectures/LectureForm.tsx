@@ -15,10 +15,36 @@ const statusOptions = [
   },
 ];
 
-export const LectureForm: React.FC<{ type: "add" | "update" }> = (props) => {
+const submissionStatusOptions = [
+  {
+    value: 1,
+    label: "Open",
+  },
+  {
+    value: 0,
+    label: "Closed",
+  },
+];
+
+export const LectureForm: React.FC<{
+  type: "add" | "update";
+  data?: Lecture;
+}> = (props) => {
   const [fileValue, setFileValue] = React.useState<File | null>(null);
 
+  const initialValues: Lecture | undefined = React.useMemo(() => {
+    return props.data ? { ...props.data } : undefined;
+  }, [props.data]);
+
   const handleFormSubmit = async (formData: Lecture) => {
+    if (props.type === "update" && props.data?.id) {
+      delete formData.file;
+
+      return await LecturesService.updateLecture(props.data?.id, {
+        ...formData,
+      });
+    }
+
     return await LecturesService.createLecture({
       ...formData,
       file: fileValue,
@@ -30,29 +56,48 @@ export const LectureForm: React.FC<{ type: "add" | "update" }> = (props) => {
   };
 
   return (
-    <Form layout="vertical" onFinish={handleFormSubmit} requiredMark>
-      <Form.Item label="Week" name="week_no" required>
-        <Input placeholder="Enter week" />
+    <Form
+      layout="vertical"
+      initialValues={initialValues}
+      onFinish={handleFormSubmit}
+      requiredMark
+    >
+      <Form.Item label="Week Number" name="week_number" required>
+        <Input type="number" placeholder="Enter week number" />
       </Form.Item>
+
       <Form.Item label="Name" name="name" required>
         <Input placeholder="Enter lecture name" />
       </Form.Item>
+
       <Form.Item label="Description" name="description" required>
         <Input.TextArea
           className="!h-[100px]"
           placeholder="Enter lecture description"
         />
       </Form.Item>
-      <Form.Item label="Module File" name="file">
-        <Input
-          type="file"
-          name="file"
-          onChange={(e) => handleFileInput(e.target.files)}
+
+      {props.type === "add" ? (
+        <Form.Item label="Module File" name="file">
+          <Input
+            type="file"
+            name="file"
+            onChange={(e) => handleFileInput(e.target.files)}
+          />
+        </Form.Item>
+      ) : null}
+
+      <Form.Item label="Status" name="is_posted">
+        <Select
+          options={submissionStatusOptions}
+          getPopupContainer={getPopupContainer}
         />
       </Form.Item>
-      <Form.Item label="Status" name="is_posted">
+
+      <Form.Item label="Submission Status" name="is_submission_open">
         <Select options={statusOptions} getPopupContainer={getPopupContainer} />
       </Form.Item>
+
       <Button htmlType="submit" type="primary" size="large" className="text-sm">
         {props.type === "add" ? "Upload Lecture" : "Update Module"}
       </Button>

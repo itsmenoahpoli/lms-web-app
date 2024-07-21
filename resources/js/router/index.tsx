@@ -122,6 +122,10 @@ export default createBrowserRouter([
         element: TeacherLectureFormPage,
       },
       {
+        path: "/dashboard/teacher/lectures/edit/:id",
+        element: TeacherLectureFormPage,
+      },
+      {
         path: "/dashboard/teacher/quizses/manage",
         element: TeacherManageQuizsesPage,
       },

@@ -1,18 +1,34 @@
 import React from "react";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { Card, Spin } from "antd";
 import { PageHeader } from "@/components/shared";
 import { LectureForm } from "@/components/domains";
-import { Card } from "antd";
+import { LecturesService } from "@/services";
 
 const ManageLecturesPage: React.FC = () => {
+  const [formType, setFormType] = React.useState<"add" | "update">("add");
+
+  const { id } = useParams();
+
+  const { isLoading, data } = useQuery({
+    queryKey: ["data-lecture"],
+    queryFn: async () => await LecturesService.getLecture(+id!),
+  });
+
+  React.useEffect(() => {
+    if (window.location.pathname.includes("edit")) setFormType("update");
+  }, []);
+
   return (
     <>
       <PageHeader
-        title="Upload Lectures"
-        subtitle="Upload new lecture module for students"
+        title="Lecture Information"
+        subtitle="Upload or edit lecture module for students"
       />
 
       <Card className="w-3/4">
-        <LectureForm type="add" />
+        {isLoading ? <Spin /> : <LectureForm type={formType} data={data} />}
       </Card>
     </>
   );
