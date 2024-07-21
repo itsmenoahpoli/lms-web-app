@@ -31,7 +31,7 @@ export const LecturesService = {
     let formData = new FormData();
 
     for (const d in data) {
-      console.log(d);
+      formData.append(d, data[d]);
     }
 
     return await httpClient
@@ -41,7 +41,6 @@ export const LecturesService = {
         },
       })
       .then((response) => {
-        console.log(response.data);
         toast.success("Lecture successfully created");
       })
       .catch(() => toast.error("Failed to create lectures"));

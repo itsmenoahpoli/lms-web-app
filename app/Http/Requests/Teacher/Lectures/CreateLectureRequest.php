@@ -22,9 +22,9 @@ class CreateLectureRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'          => 'string|required',
+            'name'          => 'string|required|unique:lectures',
             'description'   => 'string|required',
-            'file'          => 'nullable|mimes:mimes:pdf,docx,xlsx,xls',
+            'file'          => 'nullable',
             'is_posted'     => 'nullable|boolean'
         ];
     }

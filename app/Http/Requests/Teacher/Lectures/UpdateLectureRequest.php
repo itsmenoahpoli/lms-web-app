@@ -24,7 +24,7 @@ class UpdateLectureRequest extends FormRequest
         return [
             'name'          => 'string|required',
             'description'   => 'string|required',
-            'file'          => 'nullable|mimes:pdf,docx,xlsx,xls',
+            'file'          => 'nullable',
             'is_posted'     => 'nullable|boolean'
         ];
     }

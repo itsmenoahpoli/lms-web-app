@@ -44,9 +44,8 @@ export const DashboardLayout: React.FC = () => {
     return logoutSession();
   };
 
-  const isActive = (pathname: string) => {
-    console.log(window.location.pathname.includes(pathname));
-    return window.location.pathname.includes(pathname);
+  const isActive = (linkPath: string) => {
+    return window.location.pathname.includes(linkPath);
   };
 
   React.useEffect(() => {

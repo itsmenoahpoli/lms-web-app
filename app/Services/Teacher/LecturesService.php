@@ -17,7 +17,7 @@ class LecturesService extends LecturesRepository
         if ($file)
         {
             $path = $file->store('lectures/files', 'public');
-            $payload['file'] = asset($path);
+            $payload['file'] = asset('storage/' . $path);
         }
 
         return parent::create($payload);

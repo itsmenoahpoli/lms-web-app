@@ -6,9 +6,12 @@ import { Card } from "antd";
 const ManageLecturesPage: React.FC = () => {
   return (
     <>
-      <PageHeader title="Lectures" subtitle="Manage students lectures" />
+      <PageHeader
+        title="Upload Lectures"
+        subtitle="Upload new lecture module for students"
+      />
 
-      <Card className="w-1/2">
+      <Card className="w-3/4">
         <LectureForm type="add" />
       </Card>
     </>

@@ -44,8 +44,12 @@
 .ant-input,
 .ant-select {
     width: 100% !important;
-    height: 40px !important;
+    height: 40px;
     font-size: 13px !important;
+}
+
+textarea {
+    height: 120px !important;
 }
 
 .ant-select .ant-select-selection-placeholder {
