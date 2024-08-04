@@ -7,11 +7,11 @@ import type { Lecture } from "@/types/models";
 const statusOptions = [
   {
     value: 1,
-    label: "Posted",
+    label: "Open",
   },
   {
     value: 0,
-    label: "Draft",
+    label: "Closed",
   },
 ];
 
@@ -94,7 +94,7 @@ export const LectureForm: React.FC<{
         />
       </Form.Item>
 
-      <Form.Item label="Submission Status" name="is_submission_open">
+      <Form.Item label="Open for submission?" name="is_submission_open">
         <Select options={statusOptions} getPopupContainer={getPopupContainer} />
       </Form.Item>
 
