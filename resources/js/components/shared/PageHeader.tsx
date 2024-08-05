@@ -12,7 +12,9 @@ export const PageHeader: React.FC<{
           <h1 className="text-2xl font-bold">{props.title}</h1>
           <p className="text-sm text-slate-500 mt-2">{props.subtitle}</p>
         </div>
-        <div className="flex justify-end">{props.children}</div>
+        <div className="flex flex-row justify-end gap-x-4">
+          {props.children}
+        </div>
       </div>
     </div>
   );

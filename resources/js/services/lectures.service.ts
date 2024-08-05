@@ -54,6 +54,7 @@ export const LecturesService = {
       })
       .then((response) => {
         toast.success("Lecture successfully created");
+        window.location.href = "/dashboard/teacher/lectures/manage";
       })
       .catch(() => toast.error("Failed to create lectures"));
   },

@@ -3,19 +3,19 @@ export default [
     groupName: "Academics",
     items: [
       {
-        label: "Manage Lectures",
+        label: "Lectures",
         url: "/dashboard/teacher/lectures/manage",
       },
       {
-        label: "Manage Quizses",
+        label: "Quizses",
         url: "/dashboard/teacher/quizses/manage",
       },
       {
-        label: "Manage Exams",
+        label: "Exams",
         url: "/dashboard/teacher/exams/manage",
       },
       {
-        label: "Manage Lab Activities",
+        label: "Lab Activities",
         url: "/dashboard/teacher/activities/manage",
       },
     ],

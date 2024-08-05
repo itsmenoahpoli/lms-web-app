@@ -1,24 +1,29 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 import { Card, Spin } from "antd";
 import { PageHeader } from "@/components/shared";
 import { LectureForm } from "@/components/domains";
 import { LecturesService } from "@/services";
 
 const ManageLecturesPage: React.FC = () => {
-  const [formType, setFormType] = React.useState<"add" | "update">("add");
-
   const { id } = useParams();
 
-  const { isLoading, data } = useQuery({
-    queryKey: ["data-lecture"],
-    queryFn: async () => await LecturesService.getLecture(+id!),
-  });
+  const [formData, setFormData] = React.useState(undefined);
+  const [formType, setFormType] = React.useState<"add" | "update">("add");
+
+  const fetchData = async () => {
+    return await LecturesService.getLecture(+id!).then((data) =>
+      setFormData(data)
+    );
+  };
 
   React.useEffect(() => {
+    fetchData();
+
     if (window.location.pathname.includes("edit")) setFormType("update");
   }, []);
+
+  console.log("data", formData);
 
   return (
     <>
@@ -28,7 +33,7 @@ const ManageLecturesPage: React.FC = () => {
       />
 
       <Card className="w-3/4">
-        {isLoading ? <Spin /> : <LectureForm type={formType} data={data} />}
+        {!formData ? <Spin /> : <LectureForm type={formType} data={formData} />}
       </Card>
     </>
   );

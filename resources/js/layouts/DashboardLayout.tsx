@@ -60,9 +60,9 @@ export const DashboardLayout: React.FC = () => {
 
   return (
     <div className="w-screen h-screen relative">
-      <div className="w-[300px] h-screen bg-slate-900 fixed top-0 left-0">
+      <div className="w-[300px] h-screen bg-blue-900 border-r fixed top-0 left-0">
         <div className="w-full flex flex-row justify-center items-center gap-x-1 mt-10 mb-5">
-          {/* <h1 className="text-white text-lg font-medium">DentalEase</h1> */}
+          <h1 className="text-white text-lg font-medium">BASIC GEAR VIRTUAL</h1>
           <img
             src={LOGO}
             alt="brand-logo.png"
@@ -72,14 +72,14 @@ export const DashboardLayout: React.FC = () => {
 
         <div className="flex flex-col gap-y-3 px-5">
           <div className="w-full">
-            <small className="text-xs text-slate-500 font-medium">
+            <small className="text-xs text-gray-400 font-medium">
               Overview
             </small>
             <div className="flex flex-col gap-y-2 mt-2">
               <Link
                 to="/dashboard/overview"
                 // prettier-ignore
-                className={`text-xs font-medium text-gray-300 hover:text-white hover:bg-slate-800 rounded-md py-3 px-3 ${isActive(  "/dashboard/overview") ? '!bg-slate-800' : ''}`}
+                className={`text-xs font-medium text-white hover:text-white hover:bg-blue-700 rounded-md py-3 px-3 ${isActive(  "/dashboard/overview") ? '!bg-blue-700 !text-white' : ''}`}
               >
                 Dashboard Overview
               </Link>
@@ -88,7 +88,7 @@ export const DashboardLayout: React.FC = () => {
 
           {filterSidebarLinks().map((sidebarLink, index) => (
             <div className="w-full" key={`sidebar-link-group-${index}`}>
-              <small className="text-xs text-slate-500 font-medium">
+              <small className="text-xs text-gray-400 font-medium">
                 {sidebarLink.groupName}
               </small>
               <div className="flex flex-col gap-y-2 mt-2">
@@ -97,7 +97,7 @@ export const DashboardLayout: React.FC = () => {
                     to={item.url}
                     key={`sidebar-link-group-link-item-${index}`}
                     // prettier-ignore
-                    className={`text-xs font-medium text-gray-300 hover:text-white hover:bg-slate-800 rounded-md py-3 px-3 ${isActive(item.url) ? '!bg-slate-800' : ''}`}
+                    className={`text-xs font-medium text-white hover:text-white hover:bg-blue-700 rounded-md py-3 px-3 ${isActive(item.url) ? '!bg-blue-700 !text-white' : ''}`}
                   >
                     {item.label}
                   </Link>
@@ -113,7 +113,7 @@ export const DashboardLayout: React.FC = () => {
           <Breadcrumb items={paths} />
 
           <button
-            className="text-sm text-red-700 font-medium"
+            className="text-sm text-red-700 font-medium hidden"
             onClick={handleLogout}
           >
             LOGOUT

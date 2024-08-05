@@ -59,6 +59,12 @@ export const LectureForm: React.FC<{
     if (fileList) setFileValue(fileList[0]);
   };
 
+  React.useEffect(() => {
+    return () => {
+      initialValues = undefined;
+    };
+  }, []);
+
   return (
     <Form
       layout="vertical"
@@ -66,7 +72,7 @@ export const LectureForm: React.FC<{
       onFinish={handleFormSubmit}
       requiredMark
     >
-      <Form.Item label="Week Number" name="week_number" required>
+      <Form.Item label="Week No" name="week_number" required>
         <Input type="number" placeholder="Enter week number" />
       </Form.Item>
 

@@ -143,10 +143,10 @@ const ManageLecturesPage: React.FC = () => {
       render: (id: number) => {
         return (
           <Space direction="horizontal">
-            <Button onClick={() => handleEdit(id)}>
+            <Button type="link" onClick={() => handleEdit(id)}>
               <IoPencilOutline />
             </Button>
-            <Button type="primary" onClick={() => handleDelete(id)} danger>
+            <Button type="link" onClick={() => handleDelete(id)} danger>
               <IoTrashOutline />
             </Button>
           </Space>
@@ -159,9 +159,13 @@ const ManageLecturesPage: React.FC = () => {
     <>
       {context}
       <PageHeader title="LECTURES" subtitle="Manage students lectures">
+        <Button type="default" className="h-[35px]">
+          <IoAddCircleOutline size={24} /> Download CSV
+        </Button>
+
         <Link to="/dashboard/teacher/lectures/create">
-          <Button type="primary" className="h-[40px]">
-            <IoAddCircleOutline size={24} /> CREATE LECTURE
+          <Button type="primary" className="h-[35px]">
+            <IoAddCircleOutline size={24} /> Create Lecture
           </Button>
         </Link>
       </PageHeader>
