@@ -66,20 +66,20 @@ export const DashboardLayout: React.FC = () => {
           <img
             src={LOGO}
             alt="brand-logo.png"
-            className="h-[80px] w-[150px] mb-10"
+            className="h-[80px] w-[150px] mb-10 hidden"
           />
         </div>
 
         <div className="flex flex-col gap-y-3 px-5">
           <div className="w-full">
-            <small className="text-xs text-blue-100 font-medium">
+            <small className="text-xs text-slate-500 font-medium">
               Overview
             </small>
             <div className="flex flex-col gap-y-2 mt-2">
               <Link
                 to="/dashboard/overview"
                 // prettier-ignore
-                className={`text-xs text-gray-300 hover:text-white hover:bg-blue-800 rounded-md py-3 px-3 ${isActive(  "/dashboard/overview") ? '!bg-blue-800' : ''}`}
+                className={`text-xs font-medium text-gray-300 hover:text-white hover:bg-slate-800 rounded-md py-3 px-3 ${isActive(  "/dashboard/overview") ? '!bg-slate-800' : ''}`}
               >
                 Dashboard Overview
               </Link>
@@ -88,7 +88,7 @@ export const DashboardLayout: React.FC = () => {
 
           {filterSidebarLinks().map((sidebarLink, index) => (
             <div className="w-full" key={`sidebar-link-group-${index}`}>
-              <small className="text-xs text-blue-100 font-medium">
+              <small className="text-xs text-slate-500 font-medium">
                 {sidebarLink.groupName}
               </small>
               <div className="flex flex-col gap-y-2 mt-2">
@@ -97,7 +97,7 @@ export const DashboardLayout: React.FC = () => {
                     to={item.url}
                     key={`sidebar-link-group-link-item-${index}`}
                     // prettier-ignore
-                    className={`text-xs text-gray-300 hover:text-white hover:bg-blue-800 rounded-md py-3 px-3 ${isActive(item.url) ? '!bg-blue-800' : ''}`}
+                    className={`text-xs font-medium text-gray-300 hover:text-white hover:bg-slate-800 rounded-md py-3 px-3 ${isActive(item.url) ? '!bg-slate-800' : ''}`}
                   >
                     {item.label}
                   </Link>
@@ -108,11 +108,8 @@ export const DashboardLayout: React.FC = () => {
         </div>
       </div>
 
-      <div className="h-screen bg-slate-100 ml-[300px]">
-        <div
-          className="w-full h-[50px] bg-white flex justify-between items-center border-gray-200 px-5"
-          style={{ borderBottomWidth: "1px" }}
-        >
+      <div className="h-screen ml-[300px]">
+        <div className="w-full h-[50px] bg-white flex justify-between items-center px-5">
           <Breadcrumb items={paths} />
 
           <button

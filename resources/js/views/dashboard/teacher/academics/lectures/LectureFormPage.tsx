@@ -23,7 +23,7 @@ const ManageLecturesPage: React.FC = () => {
   return (
     <>
       <PageHeader
-        title="Lecture Information"
+        title="LECTURE INFORMATION"
         subtitle="Upload or edit lecture module for students"
       />
 

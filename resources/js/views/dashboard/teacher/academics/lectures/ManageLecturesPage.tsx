@@ -6,12 +6,11 @@ import {
   Button,
   Table,
   Space,
-  Input,
-  Select,
   Modal,
   type TableColumnsType,
 } from "antd";
 import {
+  IoAddCircleOutline,
   IoCloudDownloadOutline,
   IoCopyOutline,
   IoPencilOutline,
@@ -21,12 +20,10 @@ import { PageHeader } from "@/components/shared";
 import { LecturesService } from "@/services";
 import { formatDate } from "@/utils/date.util";
 import { copyToClipboard } from "@/utils/string.util";
-import { getPopupContainer } from "@/utils/select.util";
 import type { Lecture } from "@/types/models";
 
 const ManageLecturesPage: React.FC = () => {
   const [modal, context] = Modal.useModal();
-  const [filters, setFilters] = React.useState();
 
   const navigate = useNavigate();
   const { isLoading, data, refetch } = useQuery({
@@ -34,15 +31,7 @@ const ManageLecturesPage: React.FC = () => {
     queryFn: async () => await LecturesService.getLecturesList(),
   });
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-
-    console.log(value);
-  };
-
-  const handleFilter = (status: string | boolean) => {
-    console.log(status);
-  };
+  const [selectedRowKeys, setSelectedRowKeys] = React.useState<React.Key[]>([]);
 
   const handleEdit = (id: number) => {
     return navigate(`/dashboard/teacher/lectures/edit/${id}`);
@@ -56,17 +45,22 @@ const ManageLecturesPage: React.FC = () => {
     });
   };
 
+  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+    setSelectedRowKeys(newSelectedRowKeys);
+  };
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  };
+
   const tableColumns: TableColumnsType<Lecture> = [
     {
       title: "Title",
       dataIndex: "name",
     },
     {
-      title: "Description",
-      dataIndex: "description",
-    },
-    {
-      title: "Module URL",
+      title: "Module File",
       dataIndex: "file",
       render: (file: string) => {
         return (
@@ -77,9 +71,9 @@ const ManageLecturesPage: React.FC = () => {
                 copyToClipboard(file, "File url copied to clipboard!")
               }
             >
-              Copy <IoCopyOutline />
+              Copy URL <IoCopyOutline />
             </Button>
-            <a href={file} target="_blank">
+            <a href={file} download>
               <Button className="text-xs">
                 Download <IoCloudDownloadOutline />
               </Button>
@@ -102,7 +96,7 @@ const ManageLecturesPage: React.FC = () => {
         };
         return (
           <Alert
-            className="text-xs text-center font-bold w-[100px]"
+            className="text-xs text-center font-bold w-[80px] h-[20px]"
             type={status.type}
             message={status.message}
           />
@@ -119,7 +113,7 @@ const ManageLecturesPage: React.FC = () => {
         };
         return (
           <Alert
-            className="text-xs text-center font-bold w-[100px]"
+            className="text-xs text-center font-bold w-[80px] h-[20px]"
             type={status.type}
             message={status.message}
           />
@@ -164,38 +158,22 @@ const ManageLecturesPage: React.FC = () => {
   return (
     <>
       {context}
-      <PageHeader title="Lectures" subtitle="Manage students lectures">
+      <PageHeader title="LECTURES" subtitle="Manage students lectures">
         <Link to="/dashboard/teacher/lectures/create">
           <Button type="primary" className="h-[40px]">
-            CREATE LECTURE
+            <IoAddCircleOutline size={24} /> CREATE LECTURE
           </Button>
         </Link>
       </PageHeader>
 
       <Space direction="vertical" size="middle" className="w-full mt-2">
-        <div className="flex flex-row justify-between">
-          <div className="flex flex-row gap-x-3 text-sm">
-            <p>Posted (32)</p>
-            <p>Draft (16)</p>
-          </div>
-          <div className="flex flex-row gap-2 w-1/2">
-            <Input
-              className="w-full"
-              placeholder="Search"
-              onChange={handleSearch}
-            />
-            <Select
-              className="w-full"
-              placeholder="Filter by status"
-              getPopupContainer={getPopupContainer}
-            />
-          </div>
-        </div>
         <Table
+          rowKey={"id"}
+          rowSelection={rowSelection}
           dataSource={data}
           columns={tableColumns}
-          rowKey={"id"}
           loading={isLoading}
+          pagination={{ pageSize: 50 }}
         />
       </Space>
     </>

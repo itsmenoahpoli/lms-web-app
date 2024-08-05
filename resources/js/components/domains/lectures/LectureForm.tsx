@@ -32,7 +32,11 @@ export const LectureForm: React.FC<{
 }> = (props) => {
   const [fileValue, setFileValue] = React.useState<File | null>(null);
 
-  const initialValues: Lecture | undefined = React.useMemo(() => {
+  let initialValues: Lecture | undefined = React.useMemo(() => {
+    if (props.data) {
+      delete props.data["file"];
+    }
+
     return props.data ? { ...props.data } : undefined;
   }, [props.data]);
 

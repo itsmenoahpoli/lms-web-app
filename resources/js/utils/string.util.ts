@@ -7,7 +7,7 @@ export const copyToClipboard = (
 ) => {
   try {
     copy(value);
-    toast.success(message);
+    toast.info(message);
   } catch {
     toast.error("Failed to copy!");
   }
