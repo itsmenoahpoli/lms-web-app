@@ -22,6 +22,7 @@ export const DashboardLayout: React.FC = () => {
     const parts = pathname.split("/").filter((part) => part !== "");
     const breadcrumbPaths: BreadcrumbPath[] = parts.map((part, index) => {
       const url = `/${parts.slice(0, index + 1).join("/")}`;
+
       return {
         title: part,
         href: url === "" ? "/" : url,
@@ -60,8 +61,8 @@ export const DashboardLayout: React.FC = () => {
   }, []);
 
   return (
-    <div className="w-screen h-screen relative">
-      <div className="w-[300px] h-screen bg-slate-900 border-r fixed top-0 left-0">
+    <div className="w-full h-screen relative">
+      <div className="w-[300px] h-screen bg-slate-900 border-r fixed top-0 left-0 z-50">
         <div className="w-full flex flex-row justify-center items-center gap-x-1 mt-10 mb-5">
           <h1 className="text-white text-lg font-medium">BASIC GEAR VIRTUAL</h1>
           <img
@@ -80,7 +81,7 @@ export const DashboardLayout: React.FC = () => {
               <Link
                 to="/dashboard/overview"
                 // prettier-ignore
-                className={`text-xs font-medium text-white flex flex-row gap-x-3 hover:text-white hover:bg-slate-800 rounded-md py-3 px-3 ${isActive(  "/dashboard/overview") ? '!bg-slate-800 !text-white' : ''}`}
+                className={`text-xs font-medium text-white flex flex-row gap-x-3 hover:text-white hover:bg-slate-800 rounded-md py-2 px-3 ${isActive(  "/dashboard/overview") ? '!bg-slate-800 !text-white' : ''}`}
               >
                 <FiHome size={18} />
                 Dashboard Overview
@@ -93,13 +94,13 @@ export const DashboardLayout: React.FC = () => {
               <small className="text-xs text-gray-400 font-medium">
                 {sidebarLink.groupName}
               </small>
-              <div className="flex flex-col gap-y-2 mt-2">
+              <div className="flex flex-col mt-2">
                 {sidebarLink.items.map((item, index) => (
                   <Link
                     to={item.url}
                     key={`sidebar-link-group-link-item-${index}`}
                     // prettier-ignore
-                    className={`text-xs font-medium text-white flex flex-row gap-x-3 hover:text-white hover:bg-slate-800 rounded-md py-3 px-3 ${isActive(item.url) ? '!bg-slate-800 !text-white' : ''}`}
+                    className={`text-xs font-medium text-white flex flex-row gap-x-3 hover:text-white hover:bg-slate-800 rounded-md py-2 px-3 ${isActive(item.url) ? '!bg-slate-800 !text-white' : ''}`}
                   >
                     {item.icon}
                     {item.label}
@@ -111,7 +112,7 @@ export const DashboardLayout: React.FC = () => {
         </div>
       </div>
 
-      <div className="h-screen ml-[300px]">
+      <div className="w-auto h-screen ml-[300px]">
         <div className="w-full h-[50px] bg-white flex justify-between items-center px-5">
           <Breadcrumb items={paths} />
 

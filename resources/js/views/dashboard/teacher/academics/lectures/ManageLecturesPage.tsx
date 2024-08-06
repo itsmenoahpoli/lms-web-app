@@ -94,6 +94,7 @@ const ManageLecturesPage: React.FC = () => {
           message: is_posted ? "POSTED" : "DRAFT",
           type: (is_posted ? "success" : "warning") as any,
         };
+
         return (
           <Alert
             className="text-xs text-center font-bold w-[80px] h-[20px]"

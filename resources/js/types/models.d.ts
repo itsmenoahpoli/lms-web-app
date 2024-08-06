@@ -11,3 +11,18 @@ export type Lecture = {
   description: string;
   file?: string;
 } & SharedFields;
+
+export type LectureQuizQuestion = {
+  title: string;
+  answer: string;
+};
+
+export type LectureQuiz = {
+  lecture_id: string;
+  title: string;
+  title_slug?: string;
+  description: string;
+  questions: LectureQuizQuestion[];
+  statue: "draft" | "published";
+  lecture: Lecture;
+} & SharedFields;

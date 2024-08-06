@@ -25,7 +25,7 @@ class CreateLectureQuizRequest extends FormRequest
             'lecture_id'            => 'int|required',
             'title'                 => 'string|required',
             'description'           => 'string|nullable',
-            'questions'             => 'array|required',
+            'questions'             => 'array|required|min:1',
             'questions.*.title'     => 'string|required',
             'questions.*.answer'    => 'string|required',
         ];

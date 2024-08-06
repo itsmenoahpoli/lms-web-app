@@ -4,6 +4,7 @@
 export { SigninForm } from "./auth/SigninForm";
 
 /**
- * Lecture Components
+ * Dashboard Components
  */
 export { LectureForm } from "./lectures/LectureForm";
+export { LectureQuizForm } from "./lectures/LectureQuizForm";

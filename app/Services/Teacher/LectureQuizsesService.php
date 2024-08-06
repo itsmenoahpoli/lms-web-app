@@ -9,6 +9,6 @@ class LectureQuizsesService extends LectureQuizsesRepository
 {
     public function __construct(LectureQuiz $model)
     {
-        parent::__construct($model, [], []);
+        parent::__construct($model, ['lecture'], ['lecture']);
     }
 }

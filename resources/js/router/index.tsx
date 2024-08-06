@@ -56,6 +56,11 @@ const TeacherManageQuizsesPage = LoadComponent(
       import("@/views/dashboard/teacher/academics/quizses/ManageQuizsesPage")
   )
 );
+const TeacherQuizFormPage = LoadComponent(
+  React.lazy(
+    () => import("@/views/dashboard/teacher/academics/quizses/QuizFormPage")
+  )
+);
 const TeacherManageExamsPage = LoadComponent(
   React.lazy(
     () => import("@/views/dashboard/teacher/academics/exams/ManageExamsPage")
@@ -127,6 +132,14 @@ export default createBrowserRouter([
       },
       {
         path: "/dashboard/teacher/quizses/manage",
+        element: TeacherManageQuizsesPage,
+      },
+      {
+        path: "/dashboard/teacher/quizses/create",
+        element: TeacherManageQuizsesPage,
+      },
+      {
+        path: "/dashboard/teacher/quizses/edit/:id",
         element: TeacherManageQuizsesPage,
       },
       {
