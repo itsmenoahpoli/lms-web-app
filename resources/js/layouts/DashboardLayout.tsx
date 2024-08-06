@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import { Breadcrumb } from "antd";
+import { FiHome } from "react-icons/fi";
 import { useAuth } from "@/hooks";
 import { sidebarLinks } from "@/statics";
 import LOGO from "@/assets/dep-ed-logo.png";
@@ -60,7 +61,7 @@ export const DashboardLayout: React.FC = () => {
 
   return (
     <div className="w-screen h-screen relative">
-      <div className="w-[300px] h-screen bg-blue-900 border-r fixed top-0 left-0">
+      <div className="w-[300px] h-screen bg-slate-900 border-r fixed top-0 left-0">
         <div className="w-full flex flex-row justify-center items-center gap-x-1 mt-10 mb-5">
           <h1 className="text-white text-lg font-medium">BASIC GEAR VIRTUAL</h1>
           <img
@@ -79,8 +80,9 @@ export const DashboardLayout: React.FC = () => {
               <Link
                 to="/dashboard/overview"
                 // prettier-ignore
-                className={`text-xs font-medium text-white hover:text-white hover:bg-blue-700 rounded-md py-3 px-3 ${isActive(  "/dashboard/overview") ? '!bg-blue-700 !text-white' : ''}`}
+                className={`text-xs font-medium text-white flex flex-row gap-x-3 hover:text-white hover:bg-slate-800 rounded-md py-3 px-3 ${isActive(  "/dashboard/overview") ? '!bg-slate-800 !text-white' : ''}`}
               >
+                <FiHome size={18} />
                 Dashboard Overview
               </Link>
             </div>
@@ -97,8 +99,9 @@ export const DashboardLayout: React.FC = () => {
                     to={item.url}
                     key={`sidebar-link-group-link-item-${index}`}
                     // prettier-ignore
-                    className={`text-xs font-medium text-white hover:text-white hover:bg-blue-700 rounded-md py-3 px-3 ${isActive(item.url) ? '!bg-blue-700 !text-white' : ''}`}
+                    className={`text-xs font-medium text-white flex flex-row gap-x-3 hover:text-white hover:bg-slate-800 rounded-md py-3 px-3 ${isActive(item.url) ? '!bg-slate-800 !text-white' : ''}`}
                   >
+                    {item.icon}
                     {item.label}
                   </Link>
                 ))}
