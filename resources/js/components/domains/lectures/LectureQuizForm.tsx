@@ -8,6 +8,7 @@ import {
 import { getPopupContainer } from "@/utils/select.util";
 import { QuizsesService, LecturesService } from "@/services";
 import { Lecture, LectureQuizQuestion, type LectureQuiz } from "@/types/models";
+import { set } from "react-hook-form";
 
 const statusOptions = [
   {
@@ -62,6 +63,30 @@ export const LectureQuizForm: React.FC<{
         answer: "",
       },
     ]);
+  };
+
+  const removeQuestion = (index: number) => {
+    console.log(index);
+    const questionsCopy = [...questions];
+
+    questionsCopy.splice(index, 1);
+    setQuestions(questionsCopy);
+  };
+
+  const handleQuestionInput = (
+    key: keyof LectureQuizQuestion,
+    value: string,
+    index: number
+  ) => {
+    console.log(key, value, index);
+    const questionsCopy = [...questions];
+
+    questionsCopy[index] = {
+      ...questionsCopy[index],
+      [key]: value,
+    };
+
+    setQuestions(questionsCopy);
   };
 
   const fetchLecturesList = async () => {
@@ -122,17 +147,52 @@ export const LectureQuizForm: React.FC<{
           ADD
         </Button>
 
-        <div className="grid grid-cols-4 gap-4">
-          <Card className="bg-slate-50 border border-gray-200 relative">
-            <div className="flex flex-row gap-x-3 absolute top-2 right-2">
-              <Button type="link" className="p-0" title="Edit">
-                <IoPencilSharp size={18} />
-              </Button>
-              <Button type="link" className="p-0" title="Delete">
-                <IoTrashOutline color="red" size={18} />
-              </Button>
-            </div>
-          </Card>
+        <div className="bg-slate-100 rounded-md p-3">
+          <div className="grid grid-cols-3 gap-4">
+            {questions.length ? (
+              questions.map((question, idx) => (
+                <Card
+                  className="bg-slate-50 border border-gray-200 relative"
+                  key={`quiz-question-${idx}`}
+                >
+                  <div className="flex flex-row gap-x-3 absolute top-2 right-2">
+                    <Button type="link" className="p-0" title="Edit">
+                      <IoPencilSharp size={18} />
+                    </Button>
+                    <Button
+                      type="link"
+                      className="p-0"
+                      title="Delete"
+                      onClick={() => removeQuestion(idx)}
+                    >
+                      <IoTrashOutline color="red" size={18} />
+                    </Button>
+                  </div>
+
+                  <p className="text-xs text-gray-500 font-medium">Question</p>
+
+                  <div className="flex flex-col gap-y-2 mt-3">
+                    <Input
+                      className="!h-[35px]"
+                      onChange={(e) =>
+                        handleQuestionInput("title", e.target.value, idx)
+                      }
+                      placeholder="Enter question"
+                    />
+                    <Input
+                      className="!h-[35px]"
+                      onChange={(e) =>
+                        handleQuestionInput("title", e.target.value, idx)
+                      }
+                      placeholder="Enter answer"
+                    />
+                  </div>
+                </Card>
+              ))
+            ) : (
+              <small className="text-red-700">No questions added</small>
+            )}
+          </div>
         </div>
       </Form.Item>
 
