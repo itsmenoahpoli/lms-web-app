@@ -148,7 +148,7 @@ export const LectureQuizForm: React.FC<{
         </Button>
 
         <div className="bg-slate-100 rounded-md p-3">
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 gap-4">
             {questions.length ? (
               questions.map((question, idx) => (
                 <Card
@@ -172,8 +172,8 @@ export const LectureQuizForm: React.FC<{
                   <p className="text-xs text-gray-500 font-medium">Question</p>
 
                   <div className="flex flex-col gap-y-2 mt-3">
-                    <Input
-                      className="!h-[35px]"
+                    <Input.TextArea
+                      className="!h-[85px]"
                       onChange={(e) =>
                         handleQuestionInput("title", e.target.value, idx)
                       }
