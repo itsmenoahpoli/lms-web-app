@@ -6,7 +6,7 @@ const ErrorPage: React.FC = () => {
   const error = useRouteError();
   console.log(error);
   return (
-    <div className="w-screen h-screen bg-slate-950 flex justify-center items-center relative">
+    <div className="w-screen h-screen bg-slate-900 flex justify-center items-center relative">
       <img
         src={LOGO}
         alt="brand-logo.png"

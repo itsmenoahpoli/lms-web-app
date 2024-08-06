@@ -5,7 +5,7 @@ import { PageHeader } from "@/components/shared";
 import { LectureForm } from "@/components/domains";
 import { LecturesService } from "@/services";
 
-const ManageLecturesPage: React.FC = () => {
+const LectureFormPage: React.FC = () => {
   const { id } = useParams();
 
   const [formData, setFormData] = React.useState(undefined);
@@ -32,11 +32,11 @@ const ManageLecturesPage: React.FC = () => {
         subtitle="Upload or edit lecture module for students"
       />
 
-      <Card className="w-3/4">
+      <Card>
         {!formData ? <Spin /> : <LectureForm type={formType} data={formData} />}
       </Card>
     </>
   );
 };
 
-export default ManageLecturesPage;
+export default LectureFormPage;

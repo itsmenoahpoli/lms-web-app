@@ -136,11 +136,11 @@ export default createBrowserRouter([
       },
       {
         path: "/dashboard/teacher/quizses/create",
-        element: TeacherManageQuizsesPage,
+        element: TeacherQuizFormPage,
       },
       {
         path: "/dashboard/teacher/quizses/edit/:id",
-        element: TeacherManageQuizsesPage,
+        element: TeacherQuizFormPage,
       },
       {
         path: "/dashboard/teacher/exams/manage",

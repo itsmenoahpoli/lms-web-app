@@ -7,11 +7,11 @@ import type { Lecture } from "@/types/models";
 const statusOptions = [
   {
     value: 1,
-    label: "Open",
+    label: "Published",
   },
   {
     value: 0,
-    label: "Closed",
+    label: "Draft",
   },
 ];
 
@@ -32,7 +32,7 @@ export const LectureForm: React.FC<{
 }> = (props) => {
   const [fileValue, setFileValue] = React.useState<File | null>(null);
 
-  let initialValues: Lecture | undefined = React.useMemo(() => {
+  const initialValues: Lecture | undefined = React.useMemo(() => {
     if (props.data) {
       delete props.data["file"];
     }
@@ -59,12 +59,6 @@ export const LectureForm: React.FC<{
     if (fileList) setFileValue(fileList[0]);
   };
 
-  React.useEffect(() => {
-    return () => {
-      initialValues = undefined;
-    };
-  }, []);
-
   return (
     <Form
       layout="vertical"
@@ -72,18 +66,19 @@ export const LectureForm: React.FC<{
       onFinish={handleFormSubmit}
       requiredMark
     >
-      <Form.Item label="Week No" name="week_number" required>
-        <Input type="number" placeholder="Enter week number" />
+      <Form.Item label="Week No" name="week_number">
+        <Input type="number" placeholder="Enter week number" required />
       </Form.Item>
 
-      <Form.Item label="Name" name="name" required>
-        <Input placeholder="Enter lecture name" />
+      <Form.Item label="Name" name="name">
+        <Input placeholder="Enter lecture name" required />
       </Form.Item>
 
-      <Form.Item label="Description" name="description" required>
+      <Form.Item label="Description" name="description">
         <Input.TextArea
           className="!h-[100px]"
           placeholder="Enter lecture description"
+          required
         />
       </Form.Item>
 
@@ -93,6 +88,7 @@ export const LectureForm: React.FC<{
             type="file"
             name="file"
             onChange={(e) => handleFileInput(e.target.files)}
+            required
           />
         </Form.Item>
       ) : null}

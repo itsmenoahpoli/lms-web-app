@@ -2,19 +2,17 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { Card, Spin } from "antd";
 import { PageHeader } from "@/components/shared";
-import { QuizForm } from "@/components/domains";
-import { LecturesService } from "@/services";
+import { LectureQuizForm } from "@/components/domains";
+import { QuizsesService } from "@/services";
 
-const ManageLecturesPage: React.FC = () => {
+const QuizFormPage: React.FC = () => {
   const { id } = useParams();
 
   const [formData, setFormData] = React.useState(undefined);
   const [formType, setFormType] = React.useState<"add" | "update">("add");
 
   const fetchData = async () => {
-    return await LecturesService.getLecture(+id!).then((data) =>
-      setFormData(data)
-    );
+    return await QuizsesService.getQuiz(+id!).then((data) => setFormData(data));
   };
 
   React.useEffect(() => {
@@ -30,11 +28,15 @@ const ManageLecturesPage: React.FC = () => {
         subtitle="Upload or edit lecture module for students"
       />
 
-      <Card className="w-3/4">
-        {!formData ? <Spin /> : <QuizForm type={formType} data={formData} />}
+      <Card>
+        {!formData ? (
+          <Spin />
+        ) : (
+          <LectureQuizForm type={formType} data={formData} />
+        )}
       </Card>
     </>
   );
 };
 
-export default ManageLecturesPage;
+export default QuizFormPage;

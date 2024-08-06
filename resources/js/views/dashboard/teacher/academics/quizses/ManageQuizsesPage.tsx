@@ -89,7 +89,7 @@ const ManageQuizsesPage: React.FC = () => {
           <IoAddCircleOutline size={24} /> Download CSV
         </Button>
 
-        <Link to="/dashboard/teacher/quiz/create">
+        <Link to="/dashboard/teacher/quizses/create">
           <Button type="primary" className="h-[35px]">
             <IoAddCircleOutline size={24} /> Create Quiz
           </Button>
